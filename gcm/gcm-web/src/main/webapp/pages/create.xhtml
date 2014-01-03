@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<head>
+  <title><ui:insert name="title">Create User Test</ui:insert></title>
+</head>
+
+	<body>
+		<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
+		  <h:form>
+	         <table>
+	             <tr>
+	                <td><h:outputLabel for="name" value="Name : " /></td>
+	                <td><p:inputText id="name" value="#{userMB.userName}">
+	                        <f:validateLength minimum="5" />
+	                        <p:ajax event="blur" update="nameMsg" />
+	                    </p:inputText>
+	                    <p:message id="nameMsg" for="name" display="icon"/>
+	                </td>
+	             </tr>
+	             <tr>
+	                <td><h:outputLabel for="surname" value="Password : " /></td>
+	                <td><p:inputText id="surname" value="#{userMB.password}">
+	                        <f:validateLength minimum="5" />
+	                        <p:ajax event="blur" update="surnameMsg" />
+	                    </p:inputText>
+	                    <p:message id="surnameMsg" for="surname" display="icon"/>
+	                </td>
+	             </tr>
+	             <tr>
+	                <td><p:commandButton id="addUser" value="Add" action="#{userMB.addUser}" ajax="false"/></td>
+	             </tr>
+	         </table>
+	     </h:form>		
+	</body>
+
+</html>
