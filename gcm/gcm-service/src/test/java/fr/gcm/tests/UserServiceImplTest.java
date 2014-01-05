@@ -22,8 +22,10 @@ public class UserServiceImplTest
 	public void addUserTest() 
 	{
 		User user = new User();
-		user.setNom("khaled-3");
+		user.setFirstName("khaled-3");
 		user.setPassword("ssiirroopp");
+		user.setLogin("test");
+		user.setLastName("belhani");
 		userService.addUser(user);
 		assertNotNull(user.getUserID());
 	}

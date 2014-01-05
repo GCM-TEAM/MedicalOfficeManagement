@@ -5,36 +5,46 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<head>
+<h:head>
   <title><ui:insert name="title">Create User Test</ui:insert></title>
-</head>
+</h:head>
 
 	<body>
-		<ui:debug hotkey="x" rendered="#{initParam['javax.faces.FACELETS_DEVELOPMENT']}"/>
-		  <h:form>
-	         <table>
-	             <tr>
-	                <td><h:outputLabel for="name" value="Name : " /></td>
-	                <td><p:inputText id="name" value="#{userMB.userName}">
-	                        <f:validateLength minimum="5" />
-	                        <p:ajax event="blur" update="nameMsg" />
-	                    </p:inputText>
-	                    <p:message id="nameMsg" for="name" display="icon"/>
-	                </td>
-	             </tr>
-	             <tr>
-	                <td><h:outputLabel for="surname" value="Password : " /></td>
-	                <td><p:inputText id="surname" value="#{userMB.password}">
-	                        <f:validateLength minimum="5" />
-	                        <p:ajax event="blur" update="surnameMsg" />
-	                    </p:inputText>
-	                    <p:message id="surnameMsg" for="surname" display="icon"/>
-	                </td>
-	             </tr>
-	             <tr>
-	                <td><p:commandButton id="addUser" value="Add" action="#{userMB.addUser}" ajax="false"/></td>
-	             </tr>
-	         </table>
+		  <h:form id="form">
+		  <p:panel id="panel" header="New User" style="margin-bottom:10px;"> 
+		  	
+		  	<p:messages id="messages"/>
+		  	
+		  	<h:panelGrid columns="3">
+		  		<h:outputLabel for="firstName" value="Firstname: *"/>
+		  		<p:inputText id="firstName" value="#{userMB.firstName}" required="true" label="Firstname"> 
+		  			<f:validateLength minimum="3"/>
+				</p:inputText>
+		  		<p:messages for="firstName" />
+		  		
+		  		<h:outputLabel for="lastName" value="Lastname: *"/>
+		  		<p:inputText id="lastName" value="#{userMB.lastName}" required= "true" label="Lastname">
+		  			<f:validateLength minimum="3"/>
+				</p:inputText>
+		  		<p:messages for="lastName"/> 
+				
+				<h:outputLabel for="login" value="Login: *" />
+				<p:inputText id="login" value="#{userMB.login}" required="true" label="Login">
+					<f:validateLength minimum="3"/>
+				</p:inputText>
+				<p:messages for="login"/>
+				
+				<h:outputLabel for="password" value="Password: *"/>
+				<p:inputText id="password" value="#{userMB.password}" required="true" label="Password">
+					<f:validateLength minimum="3"/>
+				</p:inputText>
+				<p:messages for="password"/>
+		 	 </h:panelGrid>
+		  </p:panel>
+		  
+		  <p:commandButton value="Add User" update="messages" id="addUser" actionListener="#{userMB.addUser}" title = "add user"/> 
+
+		
 	     </h:form>		
 	</body>
 

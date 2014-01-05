@@ -13,7 +13,7 @@ import fr.gcm.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/springConfig/gcmdao-cfg.xml"})
-public class HibernateUserRepositoryTest 
+public class UserRepositoryTest 
 {
 	@Autowired
 	private UserRepository userRepository;
@@ -22,8 +22,10 @@ public class HibernateUserRepositoryTest
 	public void createUserTest ()
 	{
 		User user = new User();
-		user.setNom("khaled");
+		user.setFirstName("khaled");
 		user.setPassword("ssiirroopp");
+		user.setLogin("test");
+		user.setLastName("belhani");
 		userRepository.addUser(user);
 		assertNotNull(user.getUserID());
 	}
