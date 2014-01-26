@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#pages#create.xhtml"
+  PATH="/pages/create.xhtml" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#create.xhtml:0" NAME="item"
+   PATH="/pages/create.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="success::#pages#listUsers.xhtml"
+    NAME="output" PATH="/pages/listUsers.xhtml"
+    TARGET="rules:#pages#listUsers.xhtml" TITLE="success" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="error::#pages#error.xhtml" NAME="output1"
+    PATH="/pages/error.xhtml" TARGET="rules:#pages#error.xhtml"
+    TITLE="error" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#listUsers.xhtml"
+  PATH="/pages/listUsers.xhtml" SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#error.xhtml" PATH="/pages/error.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
