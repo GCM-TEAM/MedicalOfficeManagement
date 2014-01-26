@@ -1,6 +1,4 @@
 package fr.gcm.managed.bean;
-
-import java.awt.event.ActionEvent;
 import java.io.Serializable;
 import java.util.List;
 
