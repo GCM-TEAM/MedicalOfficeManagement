@@ -10,10 +10,13 @@
 	<param-value>Development</param-value>
   </context-param>
   <!-- Spring Context Configuration' s Path definition -->
+  
+  <!--  
   <context-param>
     <param-name>javax.faces.CONFIG_FILES</param-name>
     <param-value>/WEB-INF/faces-config.xml</param-value>
   </context-param>
+ -->
   <context-param>
      <param-name>contextConfigLocation</param-name>
      <param-value>

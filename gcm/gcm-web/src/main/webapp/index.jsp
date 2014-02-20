@@ -2,7 +2,5 @@
      xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
      xmlns:p="http://primefaces.org/ui">
-<body>
-	Hello Word
-</body>
+<jsp:forward page="pages/login.jsf"></jsp:forward>
 </html> 
