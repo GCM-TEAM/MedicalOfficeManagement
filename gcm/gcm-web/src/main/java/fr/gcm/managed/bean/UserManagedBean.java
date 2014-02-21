@@ -27,9 +27,6 @@ public class UserManagedBean implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private static final String SUCCESS = "success";
-	private static final String ERROR = "error";
-
 	private String firstName;
 	private String lastName;
 	private String login;
@@ -52,11 +49,11 @@ public class UserManagedBean implements Serializable
 			user.setPassword(password);
 			userService.addUser(user);
 			addMessage("You've registered");
-			return SUCCESS;
+			return "/pages/listUsers.xhtml?faces-redirect=true";
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		return ERROR;
+		return "/pages/error.xhtml?faces-redirect=true";
 	}
 	/**
 	 * Retourne la liste des utilisatuers

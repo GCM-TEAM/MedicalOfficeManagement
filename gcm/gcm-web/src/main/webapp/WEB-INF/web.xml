@@ -16,13 +16,14 @@
     <param-name>javax.faces.CONFIG_FILES</param-name>
     <param-value>/WEB-INF/faces-config.xml</param-value>
   </context-param>
- -->
+
   <context-param>
      <param-name>contextConfigLocation</param-name>
      <param-value>
         /WEB-INF/gcmWeb-cfg.xml
      </param-value>
   </context-param>
+   -->
    <!-- The Bootstrap listener to start up and shut down Spring's root WebApplicationContext. It is registered to Servlet Container -->
   <listener>
     <listener-class>

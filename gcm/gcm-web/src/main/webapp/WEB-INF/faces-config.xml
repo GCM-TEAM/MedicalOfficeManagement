@@ -7,21 +7,22 @@
 		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
 	</application>
 	
-	<navigation-rule>
+<!-- 	<navigation-rule>
 		
 		<from-view-id>/pages/create.xhtml</from-view-id>
 	
 		<navigation-case>
 			<from-outcome>success</from-outcome>
 			<to-view-id>/pages/listUsers.xhtml</to-view-id>
+			<redirect />
 		</navigation-case>
 		<navigation-case>
 			<from-outcome>error</from-outcome>
 			<to-view-id>/pages/error.xhtml</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-	
-	<navigation-rule>
+	 -->
+	<!-- <navigation-rule>
 		<from-view-id>/login.xhtml</from-view-id>
 		<navigation-case>
 			<from-outcome>home</from-outcome>
@@ -31,6 +32,6 @@
 			<from-outcome>login</from-outcome>
 			<to-view-id>/login.xhtml</to-view-id>
 		</navigation-case>	
-	</navigation-rule>
+	</navigation-rule> -->
 	
 </faces-config>

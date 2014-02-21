@@ -20,7 +20,7 @@
 					<h:inputText label="UserName" value="#{loginMB.username}"></h:inputText>
 					<h:outputLabel for="#{loginMB.password}" value="Password">
 						<h:inputSecret value="#{loginMB.password}"></h:inputSecret>
-						<h:commandButton actionListener="#{loginMB.login}" type="submit"
+						<h:commandButton action="#{loginMB.login}" type="submit"
 							value="Login" update="growl"></h:commandButton>
 					</h:outputLabel>
 				</h:outputLabel>
