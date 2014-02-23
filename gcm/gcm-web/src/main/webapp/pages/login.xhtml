@@ -7,29 +7,47 @@
 
 
 <h:head>
-	<link href="themes/bluesky/skin.css" rel="stylesheet" type="text/css" />
+	<link type="text/css" rel="stylesheet" href="themes/bluesky/skin.css" />
 </h:head>
 
-<p:growl id="growl" showDetail="true" life="3000" />  
 
-<center>
+<body>
+
+
+
 	<p:panel header="Authentication">
-		<h:form>
-			<h:panelGrid cellpadding="2" columns="2">
-				<h:outputLabel for="#{loginMB.username}" value="UserName">
-					<h:inputText label="UserName" value="#{loginMB.username}"></h:inputText>
-					<h:outputLabel for="#{loginMB.password}" value="Password">
-						<h:inputSecret value="#{loginMB.password}"></h:inputSecret>
-						<h:commandButton action="#{loginMB.login}" type="submit"
-							value="Login" update="growl"></h:commandButton>
-					</h:outputLabel>
-				</h:outputLabel>
-			</h:panelGrid>
-		</h:form>
-		
-	</p:panel>
-</center>
 
+
+		<h:form id="form">
+
+
+
+			<p:messages id = "messages" />
+
+
+			<h:panelGrid cellpadding="2" columns="2">
+
+
+				<h:outputLabel for="username" value="Username:" />
+
+				<p:inputText id="username" value="#{loginMB.username}"
+					label="Username">
+				</p:inputText>
+
+				<h:outputLabel for="password" value="Password:" />
+				<h:inputSecret id="password" value="#{loginMB.password}"
+					label="Password">
+				</h:inputSecret>
+
+				<p:commandButton value="Login" action="#{loginMB.login}"
+					ajax="false" />
+			</h:panelGrid>
+
+		</h:form>
+	</p:panel>
+
+
+</body>
 
 </html>
 

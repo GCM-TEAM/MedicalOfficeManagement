@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 
 import org.springframework.dao.DataAccessException;
 
+import fr.gcm.model.Profiles;
 import fr.gcm.model.User;
 import fr.gcm.service.UserService;
 
@@ -18,6 +19,8 @@ import fr.gcm.service.UserService;
 /**
  * 
  * @author KBELHANI
+ * 
+ * 		Ecran administrateur
  * 
  */
 
@@ -31,6 +34,8 @@ public class UserManagedBean implements Serializable
 	private String lastName;
 	private String login;
 	private String password;
+	private String profile;
+	
 
 
 	@ManagedProperty(value = "#{userService}")
@@ -40,20 +45,24 @@ public class UserManagedBean implements Serializable
  * ajout d'un utilisateur
  * @return string
  */
-	public String addUser() {
+	public void addUser() {
 		try {
 			User user = new User();
+			Profiles profiles = new Profiles();
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setLogin(login);
 			user.setPassword(password);
 			userService.addUser(user);
+			profiles.setProfile(profile);
+			
 			addMessage("You've registered");
-			return "/pages/listUsers.xhtml?faces-redirect=true";
+			
+	        
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-		return "/pages/error.xhtml?faces-redirect=true";
+	//	return "/pages/error.xhtml?faces-redirect=true";
 	}
 	/**
 	 * Retourne la liste des utilisatuers
@@ -69,10 +78,14 @@ public class UserManagedBean implements Serializable
 		}
 		return users;
 	}
-	
+
+
+	/**
+	 * 
+	 * @param summary
+	 */
 	public void addMessage(String summary) {  
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,  null);  
-        FacesContext.getCurrentInstance().addMessage(null, message);  
+        
     }  
 
 	/*
@@ -94,5 +107,17 @@ public class UserManagedBean implements Serializable
 
 	public String getPassword() {return password;}
 	public void setPassword(String password) {this.password = password;}
+	/**
+	 * @return the profile
+	 */
+	public String getProfile() {
+		return profile;
+	}
+	/**
+	 * @param profile the profile to set
+	 */
+	public void setProfile(String profile) {
+		this.profile = profile;
+	}
 
 }

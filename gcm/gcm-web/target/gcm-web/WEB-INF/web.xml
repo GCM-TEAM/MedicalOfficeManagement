@@ -3,5 +3,55 @@
  "http://java.sun.com/dtd/web-app_2_3.dtd" >
 
 <web-app>
-  <display-name>Archetype Created Web Application</display-name>
+  <display-name>Gestion de cabinet medicale</display-name>
+  <!-- Change to "Production" when you are ready to deploy -->
+  <context-param>
+	<param-name>javax.faces.PROJECT_STAGE</param-name>
+	<param-value>Development</param-value>
+  </context-param>
+  <!-- Spring Context Configuration' s Path definition -->
+  
+  <!--  
+  <context-param>
+    <param-name>javax.faces.CONFIG_FILES</param-name>
+    <param-value>/WEB-INF/faces-config.xml</param-value>
+  </context-param>
+
+  <context-param>
+     <param-name>contextConfigLocation</param-name>
+     <param-value>
+        /WEB-INF/gcmWeb-cfg.xml
+     </param-value>
+  </context-param>
+   -->
+   <!-- The Bootstrap listener to start up and shut down Spring's root WebApplicationContext. It is registered to Servlet Container -->
+  <listener>
+    <listener-class>
+        org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener>
+  <listener>
+    <listener-class>
+        org.springframework.web.context.request.RequestContextListener
+    </listener-class>
+  </listener>
+  <!--  JSF Servlet is defined to container / JSF Mapping--> 
+  <servlet>
+  	 <servlet-name>Faces Servlet</servlet-name> 
+ 	 <servlet-class>javax.faces.webapp.FacesServlet</servlet-class> 
+  	 <load-on-startup>1</load-on-startup> 
+  </servlet>
+  <!--  Mapping with servlet and url for the http requests. --> 
+  <servlet-mapping>
+  	<servlet-name>Faces Servlet</servlet-name>
+  	<url-pattern>*.jsf</url-pattern> 
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>Faces Servlet</servlet-name> 
+  	<url-pattern>*.xhtml</url-pattern> 
+  </servlet-mapping>
+  <!--  Welcome Page  --> 
+  <welcome-file-list>
+  	<welcome-file>index.jsp</welcome-file> 
+  </welcome-file-list>
 </web-app>
