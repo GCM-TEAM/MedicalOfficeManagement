@@ -35,20 +35,19 @@ public class LoginManagesBean {
 	 * Verifie l'existance d'un utilisatur
 	 * 
 	 */
-	public String login(ActionEvent event) {
+	public String login() {
 		
-		RequestContext context = RequestContext.getCurrentInstance();
 		FacesMessage msg = null;
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);;
-
+		RequestContext context = RequestContext.getCurrentInstance();
 		boolean loggedIn = false;
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);;
 
 		if (username != null && username.equals("admin") && password != null
 				&& password.equals("admin")) {
 			loggedIn = true;
-			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome",
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome ",
 					username);
-			FacesContext.getCurrentInstance().addMessage("messages", msg);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 			
 			context.addCallbackParam("loggedIn", loggedIn);
 			
@@ -57,7 +56,7 @@ public class LoginManagesBean {
 			loggedIn = false;
 			msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error",	
 					"Invalid credentials");
-			FacesContext.getCurrentInstance().addMessage("messages", msg);
+			FacesContext.getCurrentInstance().addMessage(null, msg);
 			
 
 			context.addCallbackParam("loggedIn", loggedIn);

@@ -12,11 +12,22 @@
 		<module>gcm-web</module>
 		<!-- module>gcm-ear</module -->
 	</modules>
+	
+	
+	<properties>
+		<spring.version>3.2.3.RELEASE</spring.version>
+		<junit.version>4.11</junit.version>
+		<logback.version>1.0.13</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		<compiler-version>2.3.2</compiler-version>
+	</properties>
+	
 	<build>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<inherited>true</inherited>
+				<version>${compiler-version}</version>
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
@@ -36,12 +47,7 @@
 
 		</plugins>
 	</build>
-	<properties>
-		<spring.version>3.2.3.RELEASE</spring.version>
-		<junit.version>4.11</junit.version>
-		<logback.version>1.0.13</logback.version>
-		<slf4j.version>1.7.5</slf4j.version>
-	</properties>
+	
 
 	<dependencyManagement>
 		<dependencies>

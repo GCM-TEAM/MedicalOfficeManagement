@@ -11,12 +11,8 @@
 
 <body>
 
-
-
 	<h:form>
-
-		<p:growl id="messages" />
-
+	
 		<p:menubar>
 			<p:submenu label="File" icon="ui-icon-document">
 				<p:submenu label="New" icon="ui-icon-contact">
@@ -46,13 +42,13 @@
 			<p:submenu label="Actions" icon="ui-icon-gear">
 				<p:submenu label="Ajax" icon="ui-icon-refresh">
 					<p:menuitem value="Save" actionListener="#{menuBean.save}"
-						icon="ui-icon-disk" update="messages" />
+						icon="ui-icon-disk"  />
 					<p:menuitem value="Update" actionListener="#{menuBean.update}"
-						icon="ui-icon-arrowrefresh-1-w" update="messages" />
+						icon="ui-icon-arrowrefresh-1-w" />
 				</p:submenu>
 				<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
 					<p:menuitem value="Delete" actionListener="#{menuBean.delete}"
-						icon="ui-icon-close" update="messages" ajax="false" />
+						icon="ui-icon-close" ajax="false" />
 				</p:submenu>
 			</p:submenu>
 
@@ -68,8 +64,8 @@
 	<p:panel id="panel" header="New User" style="margin-bottom:10px;">
 
 		<h:form id="form">
-
-			<p:messages id = "messages" for="messages" />
+		
+			<p:growl id = "messagesCreate"  showDetail="true" life="3000"/> 
 
 			<h:panelGrid columns="3">
 				<h:outputLabel for="firstName" value="Firstname: *" />
@@ -109,7 +105,7 @@
 			</h:panelGrid>
 			
 			
-			<p:commandButton value="Add User" update="messages" id="addUser"
+			<p:commandButton value="Add User" update="messagesCreate" id="addUser"
 			actionListener="#{userMB.addUser}" title="Add user" />
 
 		</h:form>
