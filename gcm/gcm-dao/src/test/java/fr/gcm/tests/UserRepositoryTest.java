@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import fr.gcm.dao.UserRepository;
+import fr.gcm.dao.IUserRepository;
 import fr.gcm.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -16,7 +16,7 @@ import fr.gcm.model.User;
 public class UserRepositoryTest 
 {
 	@Autowired
-	private UserRepository userRepository;
+	private IUserRepository userRepository;
 	
 	@Test
 	public void createUserTest ()
