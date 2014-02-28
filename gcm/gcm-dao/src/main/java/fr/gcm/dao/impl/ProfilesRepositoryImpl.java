@@ -9,7 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.gcm.dao.IProfileRepository;
+import fr.gcm.dao.IProfilesRepository;
 import fr.gcm.model.Profiles;
 
 /**
@@ -17,14 +17,14 @@ import fr.gcm.model.Profiles;
  * @author ML11181N
  * 
  *         Implementation des comportements décrits dans l'interface de l'objet
- *         profil
+ *         profiles dans la couche DAO.
  */
 @Repository
 @Transactional
-public class ProfileRepositoryImpl implements IProfileRepository {
+public class ProfilesRepositoryImpl implements IProfilesRepository {
 
 	private static final Logger LOGGER = LoggerFactory
-			.getLogger(ProfileRepositoryImpl.class);
+			.getLogger(ProfilesRepositoryImpl.class);
 	/**
 	 * Fabrique de session hibernate
 	 */
@@ -33,7 +33,7 @@ public class ProfileRepositoryImpl implements IProfileRepository {
 	/**
 	 * Constructeur : crée une nouvelle instance de : UserRepositoryImpl
 	 */
-	public ProfileRepositoryImpl() {
+	public ProfilesRepositoryImpl() {
 	}
 
 	/**

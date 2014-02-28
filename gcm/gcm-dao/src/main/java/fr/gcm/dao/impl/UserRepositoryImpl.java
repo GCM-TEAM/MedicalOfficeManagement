@@ -16,7 +16,8 @@ import fr.gcm.model.User;
  * 
  * @author KBELHANI
  * 
- *         Impelementation de signatures décrites dans l'interface.
+ *         Implementation des comportements décrits dans l'interface de l'objet
+ *         user dans la couche DAO.
  * 
  */
 

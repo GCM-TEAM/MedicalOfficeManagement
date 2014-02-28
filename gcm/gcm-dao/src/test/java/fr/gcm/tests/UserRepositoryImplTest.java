@@ -13,7 +13,7 @@ import fr.gcm.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/springConfig/gcmdao-cfg.xml"})
-public class UserRepositoryTest 
+public class UserRepositoryImplTest 
 {
 	@Autowired
 	private IUserRepository userRepository;

@@ -8,7 +8,7 @@ import fr.gcm.model.User;
  * 
  * @author KBELHANI
  * 
- * 			Interface définit l'ensemble de traitements sur le User 
+ * 			Interface définit l'ensemble de traitements sur le User dans la couche DAO.
  */
 
 public interface IUserRepository

@@ -9,14 +9,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import fr.gcm.model.User;
-import fr.gcm.service.UserService;
+import fr.gcm.service.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/springConfig/gcmService-cfg.xml"})
 public class UserServiceImplTest
 {
 	@Autowired
-	private UserService userService;
+	private IUserService userService;
 
 	@Test
 	public void addUserTest() 
