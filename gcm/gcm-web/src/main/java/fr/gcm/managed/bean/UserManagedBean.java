@@ -12,7 +12,7 @@ import org.springframework.dao.DataAccessException;
 
 import fr.gcm.model.Profiles;
 import fr.gcm.model.User;
-import fr.gcm.service.UserService;
+import fr.gcm.service.IUserService;
 
 
 
@@ -39,7 +39,7 @@ public class UserManagedBean implements Serializable
 
 
 	@ManagedProperty(value = "#{userService}")
-	private UserService userService;
+	private IUserService userService;
 	
 /**
  * ajout d'un utilisateur
@@ -95,8 +95,8 @@ public class UserManagedBean implements Serializable
 	 * getter & setter
 	 */
 
-	public UserService getUserService() {return userService;}
-	public void setUserService(UserService userService) {this.userService = userService;}
+	public IUserService getUserService() {return userService;}
+	public void setUserService(IUserService userService) {this.userService = userService;}
 
 	
 	public String getFirstName() {return firstName;}

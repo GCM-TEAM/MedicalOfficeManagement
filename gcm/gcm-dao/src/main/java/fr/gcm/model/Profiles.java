@@ -4,20 +4,23 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
- * 
+ *  
  * @author MLoubari
  *
+ *	
+ *			Modele de l'objet profiles
  */
-/*
- * Ajout des requetes nomms HQL
- */
+
 
 @Entity
 @Table(name = "PROFILES")
@@ -26,7 +29,8 @@ public class Profiles implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	private Long 	profilesID; 			// identifiant profiles
-	private String  profile;				//  profile des utilisateurs
+	private String  profile;				// profile des utilisateurs
+	private User user;						// utilisateur
 	
 	/**
 	 * Constructeur : cre une nouvelle instance de : Profiles
@@ -80,5 +84,20 @@ public class Profiles implements Serializable
 	@Column(name = "PROFILE")
 	public String getProfile() {return profile;}
 	public void setProfile(String profile) {this.profile = profile;}
-	
+
+	/**
+	 * @return the user
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "USERID" , nullable = false )
+	public User getUser() {
+		return user;
+	}
+
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
+	}	
 }

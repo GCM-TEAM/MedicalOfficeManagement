@@ -8,26 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import fr.gcm.dao.IUserRepository;
 import fr.gcm.model.User;
-import fr.gcm.service.IUserService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/springConfig/gcmService-cfg.xml"})
-public class UserServiceImplTest
+@ContextConfiguration(locations = {"classpath:/springConfig/gcmdao-cfg.xml"})
+public class UserRepositoryImplTest 
 {
 	@Autowired
-	private IUserService userService;
-
+	private IUserRepository userRepository;
+	
 	@Test
-	public void addUserTest() 
+	public void createUserTest ()
 	{
 		User user = new User();
-		user.setFirstName("khaled-3");
+		user.setFirstName("khaled");
 		user.setPassword("ssiirroopp");
 		user.setLogin("test");
 		user.setLastName("belhani");
-		userService.addUser(user);
+		userRepository.addUser(user);
 		assertNotNull(user.getUserID());
 	}
-
 }
