@@ -81,10 +81,13 @@ public class UserManagedBean implements Serializable
 
 
 	/**
-	 * 
+	 * Message d'information
 	 * @param summary
 	 */
 	public void addMessage(String summary) {  
+		
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,"New account created");
+		FacesContext.getCurrentInstance().addMessage("messagesCreate", msg);
         
     }  
 
