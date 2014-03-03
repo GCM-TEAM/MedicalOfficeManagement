@@ -1,4 +1,5 @@
 package fr.gcm.managed.bean;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -12,22 +13,20 @@ import org.springframework.dao.DataAccessException;
 
 import fr.gcm.model.Profiles;
 import fr.gcm.model.User;
+import fr.gcm.service.IProfilesService;
 import fr.gcm.service.IUserService;
-
-
 
 /**
  * 
  * @author KBELHANI
  * 
- * 		Ecran administrateur
+ *         Ecran administrateur
  * 
  */
 
 @ManagedBean(name = "userMB")
 @RequestScoped
-public class UserManagedBean implements Serializable
-{
+public class UserManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String firstName;
@@ -35,37 +34,42 @@ public class UserManagedBean implements Serializable
 	private String login;
 	private String password;
 	private String profile;
-	
-
 
 	@ManagedProperty(value = "#{userService}")
 	private IUserService userService;
-	
-/**
- * ajout d'un utilisateur
- * @return string
- */
+	@ManagedProperty(value = "#{profilesService}")
+	private IProfilesService profilesService;
+
+	/**
+	 * Ajout d'un utilisateur avec son profil
+	 */
 	public void addUser() {
 		try {
 			User user = new User();
-			Profiles profiles = new Profiles();
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setLogin(login);
 			user.setPassword(password);
-			userService.addUser(user);
+
+			Profiles profiles = new Profiles();
 			profiles.setProfile(profile);
-			
+
+			profiles.setUser(user);
+			user.getProfiles().add(profiles);
+
+			userService.addUser(user);
+			profilesService.addProfile(profiles);
+
 			addMessage("You've registered");
-			
-	        
+
 		} catch (DataAccessException e) {
 			e.printStackTrace();
 		}
-	//	return "/pages/error.xhtml?faces-redirect=true";
 	}
+
 	/**
 	 * Retourne la liste des utilisatuers
+	 * 
 	 * @return liste
 	 */
 
@@ -79,45 +83,83 @@ public class UserManagedBean implements Serializable
 		return users;
 	}
 
-
 	/**
 	 * Message d'information
-	 * @param summary
+	 * 
+	 * @param message
+	 *            message
 	 */
-	public void addMessage(String summary) {  
-		
-		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, summary,"New account created");
+	public void addMessage(String message) {
+
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
+				message, "New account created");
 		FacesContext.getCurrentInstance().addMessage("messagesCreate", msg);
-        
-    }  
+
+	}
 
 	/*
 	 * getter & setter
 	 */
 
-	public IUserService getUserService() {return userService;}
-	public void setUserService(IUserService userService) {this.userService = userService;}
+	public IUserService getUserService() {
+		return userService;
+	}
 
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
 	
-	public String getFirstName() {return firstName;}
-	public void setFirstName(String firstName) {this.firstName = firstName;}
 
-	public String getLastName() {return lastName;}
-	public void setLastName(String lastName) {this.lastName = lastName;}
+	public IProfilesService getProfilesService() {
+		return profilesService;
+	}
 
-	public String getLogin() {return login;}
-	public void setLogin(String login) {this.login = login;}
+	public void setProfilesService(IProfilesService profilesService) {
+		this.profilesService = profilesService;
+	}
 
-	public String getPassword() {return password;}
-	public void setPassword(String password) {this.password = password;}
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	/**
 	 * @return the profile
 	 */
 	public String getProfile() {
 		return profile;
 	}
+
 	/**
-	 * @param profile the profile to set
+	 * @param profile
+	 *            the profile to set
 	 */
 	public void setProfile(String profile) {
 		this.profile = profile;

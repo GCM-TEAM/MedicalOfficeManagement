@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -25,8 +27,10 @@ import fr.gcm.model.User;
 @Transactional
 public class UserRepositoryImpl implements IUserRepository {
 
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(UserRepositoryImpl.class);
 	/**
-	 *  Fabrique de session hibernate
+	 * Fabrique de session hibernate
 	 */
 	private SessionFactory sessionFactory;
 
@@ -43,8 +47,9 @@ public class UserRepositoryImpl implements IUserRepository {
 	public void addUser(User user) {
 		try {
 			getSessionFactory().saveOrUpdate(user);
+			LOGGER.info("Insertion du user");
 		} catch (DataAccessException e) {
-			e.printStackTrace();
+			LOGGER.error("Erreur lors de l'insertion de l'utilisateur", e);
 		}
 	}
 
@@ -54,14 +59,23 @@ public class UserRepositoryImpl implements IUserRepository {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<User> findAll() {
-		return getSessionFactory().createQuery("from User").list();
+
+		List<User> listUsers = null;
+
+		try {
+
+			listUsers = getSessionFactory().createQuery("from User").list();
+
+		} catch (DataAccessException e) {
+			LOGGER.error("Erreur lors de l'extraction des utilisateurs", e);
+		}
+		return listUsers;
 	}
 
-	
 	/*
 	 * getter & setter
 	 */
-	
+
 	/**
 	 * Récupére la courante session
 	 * 
@@ -70,7 +84,6 @@ public class UserRepositoryImpl implements IUserRepository {
 	private Session getSessionFactory() {
 		return sessionFactory.getCurrentSession();
 	}
-
 
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
