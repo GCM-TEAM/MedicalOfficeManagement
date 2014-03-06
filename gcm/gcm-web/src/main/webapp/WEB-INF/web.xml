@@ -9,21 +9,7 @@
 	<param-name>javax.faces.PROJECT_STAGE</param-name>
 	<param-value>Development</param-value>
   </context-param>
-  <!-- Spring Context Configuration' s Path definition -->
-  
-  <!--  
-  <context-param>
-    <param-name>javax.faces.CONFIG_FILES</param-name>
-    <param-value>/WEB-INF/faces-config.xml</param-value>
-  </context-param>
 
-  <context-param>
-     <param-name>contextConfigLocation</param-name>
-     <param-value>
-        /WEB-INF/gcmWeb-cfg.xml
-     </param-value>
-  </context-param>
-   -->
    <!-- The Bootstrap listener to start up and shut down Spring's root WebApplicationContext. It is registered to Servlet Container -->
   <listener>
     <listener-class>
@@ -50,6 +36,13 @@
   	<servlet-name>Faces Servlet</servlet-name> 
   	<url-pattern>*.xhtml</url-pattern> 
   </servlet-mapping>
+  
+  <!-- validité de la séssion -->
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
   <!--  Welcome Page  --> 
   <welcome-file-list>
   	<welcome-file>index.jsp</welcome-file> 

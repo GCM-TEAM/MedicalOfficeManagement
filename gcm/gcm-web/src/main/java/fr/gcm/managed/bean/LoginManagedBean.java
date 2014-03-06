@@ -2,11 +2,15 @@ package fr.gcm.managed.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
+import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
+
+import fr.gcm.service.IUserService;
+import fr.gcm.utils.ManageSession;
 
 /**
  * 
@@ -17,21 +21,24 @@ import org.primefaces.context.RequestContext;
  */
 @ManagedBean(name = "loginMB")
 @RequestScoped
-public class LoginManagesBean {
+public class LoginManagedBean {
 
 	/**
 	 * Nom d'utilisateur
 	 * 
 	 */
-	private String username;
+	private String login;
 
 	/**
 	 * Mot de passe
 	 */
 	private String password;
+	
+	
+	@ManagedProperty(value = "#{userService}")
+	private IUserService userService;
 
 	/**
-	 * 
 	 * Verifie l'existance d'un utilisatur
 	 * 
 	 */
@@ -40,13 +47,21 @@ public class LoginManagesBean {
 		FacesMessage msg = null;
 		RequestContext context = RequestContext.getCurrentInstance();
 		boolean loggedIn = false;
-		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);;
+		FacesContext.getCurrentInstance().getExternalContext().getFlash().setKeepMessages(true);
+		
 
-		if (username != null && username.equals("admin") && password != null
-				&& password.equals("admin")) {
+		if (login != null &&  password != null) {
+
+			
+			if(userService.verifyUserExistance(login, password)){
+				
+				HttpSession session = ManageSession.getSession();
+				session.setAttribute("login", login);
+			}
+			
 			loggedIn = true;
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome ",
-					username);
+					login);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			
 			context.addCallbackParam("loggedIn", loggedIn);
@@ -81,10 +96,10 @@ public class LoginManagesBean {
 	}
 
 	public String getUsername() {
-		return username;
+		return login;
 	}
 
 	public void setUsername(String username) {
-		this.username = username;
+		this.login = username;
 	}
 }
