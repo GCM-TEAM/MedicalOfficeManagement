@@ -49,8 +49,13 @@ public class UserRepositoryImpl implements IUserRepository {
 	public void addUser(User user) {
 		try {
 			getSessionFactory().saveOrUpdate(user);
+			LOGGER.info("Insertion du user");
 		} catch (DataAccessException e) {
+
 			LOGGER.error("Erreur lors de l'insertion de l'objet user", e);
+
+			LOGGER.error("Erreur lors de l'insertion de l'utilisateur", e);
+
 		}
 	}
 
