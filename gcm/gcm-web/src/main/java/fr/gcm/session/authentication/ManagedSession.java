@@ -1,4 +1,4 @@
-package fr.gcm.utils;
+package fr.gcm.session.authentication;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
  * 
  *         permet de gerer les session
  */
-public class ManageSession {
+public class ManagedSession {
 
 	/**
 	 * Retourne une session
@@ -36,14 +36,15 @@ public class ManageSession {
 	 * 
 	 * @return login de l'utilisateur
 	 */
-	public static String getUserName() {
+	public static String getLoginSession() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
 				.getExternalContext().getSession(false);
 		return session.getAttribute("login").toString();
 	}
-	
+
 	/**
 	 * Retourne l'identifiant de l'utilisateur
+	 * 
 	 * @return
 	 */
 	public static String getUserId() {

@@ -2,7 +2,6 @@ package fr.gcm.service;
 
 import java.util.List;
 
-import fr.gcm.business.objects.Authentication;
 import fr.gcm.model.User;
 
 /**
@@ -36,10 +35,8 @@ public interface IUserService {
 	 * 
 	 * @param login
 	 *            login
-	 * @param password
-	 *            mot de passe
 	 * @return boolean
 	 */
-	boolean verifyUserExistance(String login, String password);
+	boolean verifyUserExistance(String login);
 
 }

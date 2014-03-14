@@ -13,8 +13,6 @@
 
 	<h:form>
 
-
-
 		<p:growl id="messages" />
 
 
@@ -66,7 +64,7 @@
 					<f:facet name="options">
 						<p:inputText style="margin-right:10px" />
 						<p:commandButton value="Logout" icon="ui-icon-extlink"
-							action="/pages/login.xhtml?faces-redirect=true" />
+							action="#{userMB.logout}" />
 					</f:facet>
 				</p:menubar>
 

@@ -12,7 +12,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.gcm.business.objects.Authentication;
 import fr.gcm.dao.IUserRepository;
 import fr.gcm.model.User;
 
@@ -81,14 +80,13 @@ public class UserRepositoryImpl implements IUserRepository {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User getUserByLoginAndPwd(Authentication authentication) {
+	public User getUserByLoginAndPwd(String login) {
 
 		Query loginQuery = null;
 		try {
 			loginQuery = getSessionFactory().createQuery(
-					"from User where login = :login and password = :password");
-			loginQuery.setParameter("login", authentication.getLogin());
-			loginQuery.setParameter("password", authentication.getPassword());
+					"from User where login = :login");
+			loginQuery.setParameter("login", login);
 		} catch (DataAccessException e) {
 			LOGGER.error(
 					"Erreur lors de l'extraction de l'objet user pour l'authtification",

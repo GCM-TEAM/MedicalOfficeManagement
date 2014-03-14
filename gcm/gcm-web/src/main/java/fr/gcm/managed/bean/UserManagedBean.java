@@ -15,6 +15,7 @@ import fr.gcm.model.Profiles;
 import fr.gcm.model.User;
 import fr.gcm.service.IProfilesService;
 import fr.gcm.service.IUserService;
+import fr.gcm.session.authentication.CommunActions;
 
 /**
  * 
@@ -26,7 +27,7 @@ import fr.gcm.service.IUserService;
 
 @ManagedBean(name = "userMB")
 @RequestScoped
-public class UserManagedBean implements Serializable {
+public class UserManagedBean extends CommunActions implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String firstName;
@@ -103,59 +104,102 @@ public class UserManagedBean implements Serializable {
 	 * getter & setter
 	 */
 	
+	
+	/**
+	 * @return the firstName
+	 */
 	public String getFirstName() {
 		return firstName;
 	}
 
+	/**
+	 * @param firstName the firstName to set
+	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 
+	/**
+	 * @return the lastName
+	 */
 	public String getLastName() {
 		return lastName;
 	}
 
+	/**
+	 * @param lastName the lastName to set
+	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 
+	/**
+	 * @return the login
+	 */
 	public String getLogin() {
 		return login;
 	}
 
+	/**
+	 * @param login the login to set
+	 */
 	public void setLogin(String login) {
 		this.login = login;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
+	/**
+	 * @return the profile
+	 */
 	public String getProfile() {
 		return profile;
 	}
 
+	/**
+	 * @param profile the profile to set
+	 */
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
 
+	/**
+	 * @return the userService
+	 */
 	public IUserService getUserService() {
 		return userService;
 	}
 
+	/**
+	 * @param userService the userService to set
+	 */
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
 
+	/**
+	 * @return the profilesService
+	 */
 	public IProfilesService getProfilesService() {
 		return profilesService;
 	}
 
+	/**
+	 * @param profilesService the profilesService to set
+	 */
 	public void setProfilesService(IProfilesService profilesService) {
 		this.profilesService = profilesService;
+	}
+
+	/**
+	 * @return the password
+	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
