@@ -2,7 +2,6 @@ package fr.gcm.dao;
 
 import java.util.List;
 
-import fr.gcm.business.objects.Authentication;
 import fr.gcm.model.User;
 
 /**
@@ -34,9 +33,7 @@ public interface IUserRepository {
 	 * 
 	 * @param login
 	 *            login
-	 * @param password
-	 *            mot de passe
 	 * @return user 
 	 */
-	User getUserByLoginAndPwd(Authentication authentication);
+	User getUserByLoginAndPwd(String login);
 }

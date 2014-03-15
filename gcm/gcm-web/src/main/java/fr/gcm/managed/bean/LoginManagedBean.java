@@ -1,14 +1,16 @@
 package fr.gcm.managed.bean;
 
+import java.io.Serializable;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
-
+import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
-
 import fr.gcm.service.IUserService;
+import fr.gcm.session.authentication.ManagedSession;
 
 /**
  * 
@@ -19,7 +21,12 @@ import fr.gcm.service.IUserService;
  */
 @ManagedBean(name = "loginMB")
 @RequestScoped
-public class LoginManagedBean {
+public class LoginManagedBean implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Nom d'utilisateur
@@ -49,11 +56,10 @@ public class LoginManagedBean {
 
 		if (login != null && password != null) {
 
-			if (userService.verifyUserExistance(login, password)) {
+			if (userService.verifyUserExistance(login)) {
 
-				// HttpSession session = ManageSession.getSession();
-				// session.setAttribute("login", login);
-				// }
+				HttpSession session = ManagedSession.getSession();
+				session.setAttribute("login", login);
 
 				loggedIn = true;
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome ",
@@ -92,11 +98,34 @@ public class LoginManagedBean {
 		this.password = password;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getUsername() {
 		return login;
 	}
 
+	/**
+	 * 
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		this.login = username;
+	}
+
+	/**
+	 * @return the userService
+	 */
+	public IUserService getUserService() {
+		return userService;
+	}
+
+	/**
+	 * @param userService
+	 *            the userService to set
+	 */
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
 	}
 }

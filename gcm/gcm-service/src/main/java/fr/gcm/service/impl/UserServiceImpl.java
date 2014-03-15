@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.gcm.business.objects.Authentication;
 import fr.gcm.dao.IUserRepository;
 import fr.gcm.model.User;
 import fr.gcm.service.IUserService;
@@ -35,19 +34,14 @@ public class UserServiceImpl implements IUserService {
 			userRepository.addUser(user);
 		}
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean verifyUserExistance(String login, String password) {
-		
-		Authentication authentication = new Authentication();
-		
-		authentication.setLogin(login);
-		authentication.setPassword(password);
-		
-		if (userRepository.getUserByLoginAndPwd(authentication) != null){
+	public boolean verifyUserExistance(String login) {
+
+		if (userRepository.getUserByLoginAndPwd(login) != null) {
 			return true;
 		}
 		return false;
