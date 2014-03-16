@@ -9,7 +9,7 @@
 	<title><ui:insert name="title">Create User</ui:insert></title>
 </h:head>
 
-<body>
+<h:body>
 
 	<h:form>
 	
@@ -90,10 +90,10 @@
 				<p:messages for="login" />
 
 				<h:outputLabel for="password" value="Password: *" />
-				<h:inputSecret id="password" value="#{userMB.password}"
+				<p:inputText id="password" value="#{userMB.password}"
 					required="true" label="Password">
 					<f:validateLength minimum="3" />
-				</h:inputSecret>
+				</p:inputText>
 				<p:messages for="password" />
 				
 				<h:outputLabel for="profile" value="Profile *" />
@@ -120,6 +120,6 @@
 
 	</h:form>
 
-</body>
+</h:body>
 
 </html>

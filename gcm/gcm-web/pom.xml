@@ -17,6 +17,17 @@
 		<jstl.version>1.2</jstl.version>
 		<prime.version>0.7.1</prime.version>
 	</properties>
+
+	<!-- primefaces repo -->
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>Prime Repo</name>
+			<url>http://repository.primefaces.org</url>
+		</repository>
+	</repositories>
+	
+	
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -59,6 +70,7 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
+
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -67,10 +79,10 @@
 
 		<!-- Primefaces dependency -->
 		<dependency>
-			<groupId>org.primefaces.extensions</groupId>
-			<artifactId>primefaces-extensions</artifactId>
-			<version>0.7.1</version>
-		</dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>4.0.RC1</version>
+	</dependency>
 		<!-- LogBack dependency -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
