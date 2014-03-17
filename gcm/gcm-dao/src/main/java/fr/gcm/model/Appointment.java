@@ -35,7 +35,7 @@ public class Appointment implements Serializable
 	private Patient patient; 				// patient
 	private Consultation consultation; 		//consultation
 	/**
-	 * Constructeur : cre une nouvelle instance de : RendezVous
+	 * Constructeur : cree une nouvelle instance de : RendezVous
 	 */
 	public Appointment() {}
 

@@ -12,43 +12,87 @@
 
 <h:body>
 
+	<h:form id="form">
 
+		<p:growl id="messages" showDetail="true" />
 
-    <h:form id="form">  
-      
-        <p:growl id="messages" showDetail="true" />  
-      
-        <p:schedule id="schedule" value="#{schudelerMB.eventModel}" widgetVar="myschedule">  
-      
-            <p:ajax event="dateSelect" listener="#{schudelerMB.onDateSelect}" update="eventDetails" oncomplete="PF('eventDialog').show()" />  
-            <p:ajax event="eventSelect" listener="#{schudelerMB.onEventSelect}" update="eventDetails" oncomplete="PF('eventDialog').show()" />  
-            <p:ajax event="eventMove" listener="#{schudelerMB.onEventMove}" update="messages" />  
-            <p:ajax event="eventResize" listener="#{schudelerMB.onEventResize}" update="messages" />  
-      
-        </p:schedule>  
-      
-        <p:dialog widgetVar="eventDialog" header="Event Details" showEffect="clip" hideEffect="clip">  
-            <h:panelGrid id="eventDetails" columns="2">  
-                <h:outputLabel for="title" value="Title:" />  
-                <p:inputText id="title" value="#{schudelerMB.event.title}" required="true"/>  
-      
-                <h:outputLabel for="from" value="From:" />  
-                <p:inputMask id="from" value="#{schudelerMB.event.startDate}" mask="99/99/9999">  
-                    <f:convertDateTime pattern="dd/MM/yyyy" />  
-                </p:inputMask>  
-      
-                <h:outputLabel for="to" value="To:" />  
-                <p:inputMask id="to" value="#{schudelerMB.event.endDate}" mask="99/99/9999">  
-                    <f:convertDateTime pattern="dd/MM/yyyy" />  
-                </p:inputMask>  
-      
-                <h:outputLabel for="allDay" value="All Day:" />  
-                <h:selectBooleanCheckbox id="allDay" value="#{schudelerMB.event.allDay}" />  
-      
-                <p:commandButton type="reset" value="Reset" />  
-                <p:commandButton id="addButton" value="Save" actionListener="#{schudelerMB.addEvent}" oncomplete="PF('myschedule').update();PF('eventDialog').hide();"/>  
-            </h:panelGrid>  
-        </p:dialog>  
-    </h:form>  
+		<p:schedule id="schedule" value="#{schudelerMB.eventModel}"
+			widgetVar="myschedule" locale="fr">
+
+			<p:ajax event="dateSelect" listener="#{schudelerMB.onDateSelect}"
+				update="eventDetails" oncomplete="PF('eventDialog').show()" />
+			<p:ajax event="eventSelect" listener="#{schudelerMB.onEventSelect}"
+				update="eventDetails" oncomplete="PF('eventDialog').show()" />
+			<p:ajax event="eventMove" listener="#{schudelerMB.onEventMove}"
+				update="messages" />
+			<p:ajax event="eventResize" listener="#{schudelerMB.onEventResize}"
+				update="messages" />
+
+		</p:schedule>
+
+		<p:dialog widgetVar="eventDialog" header="Event Details"
+			showEffect="clip" hideEffect="clip">
+			<h:panelGrid id="eventDetails" columns="2">
+				<h:outputLabel for="title" value="Title:" />
+				<p:inputText id="title" value="#{schudelerMB.event.title}"
+					required="true" />
+
+				<h:outputLabel for="from" value="From:" />
+				<p:inputMask id="from" value="#{schudelerMB.event.startDate}"
+					mask="99/99/9999">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</p:inputMask>
+
+				<h:outputLabel for="to" value="To:" />
+				<p:inputMask id="to" value="#{schudelerMB.event.endDate}"
+					mask="99/99/9999">
+					<f:convertDateTime pattern="dd/MM/yyyy" />
+				</p:inputMask>
+
+				<h:outputLabel for="allDay" value="All Day:" />
+				<h:selectBooleanCheckbox id="allDay"
+					value="#{schudelerMB.event.allDay}" />
+
+				<p:commandButton type="reset" value="Reset" />
+				<p:commandButton id="addButton" value="Save"
+					actionListener="#{schudelerMB.addEvent}"
+					oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+			</h:panelGrid>
+		</p:dialog>
+	</h:form>
+
+	<script type="text/javascript">
+		PrimeFaces.locales['fr'] = {
+			closeText : 'Fermer',
+			prevText : 'Précédent',
+			nextText : 'Suivant',
+			monthNames : [ 'Janvier', 'Février', 'Mars', 'Avril', 'Mai',
+					'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre',
+					'Novembre', 'Décembre' ],
+			monthNamesShort : [ 'Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun',
+					'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc' ],
+			dayNames : [ 'Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi',
+					'Vendredi', 'Samedi' ],
+			dayNamesShort : [ 'Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam' ],
+			dayNamesMin : [ 'D', 'L', 'M', 'M', 'J', 'V', 'S' ],
+			weekHeader : 'Semaine',
+			firstDay : 1,
+			isRTL : false,
+			showMonthAfterYear : false,
+			yearSuffix : '',
+			timeOnlyTitle : 'Choisir l\'heure',
+			timeText : 'Heure',
+			hourText : 'Heures',
+			minuteText : 'Minutes',
+			secondText : 'Secondes',
+			currentText : 'Maintenant',
+			ampm : false,
+			month : 'Mois',
+			week : 'Semaine',
+			day : 'Jour',
+			allDayText : 'Toute la journée',
+		};
+	</script>
 </h:body>
+
 </html>

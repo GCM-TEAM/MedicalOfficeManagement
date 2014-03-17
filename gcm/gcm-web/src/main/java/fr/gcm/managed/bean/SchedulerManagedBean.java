@@ -6,7 +6,7 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -25,8 +25,8 @@ import org.primefaces.model.ScheduleModel;
  *         Permet de planifier un rendez vous avec le(s) medecin(s).
  */
 @ManagedBean(name = "schudelerMB")
-@RequestScoped
-public class SchudelerManagedBean implements Serializable {
+@SessionScoped
+public class SchedulerManagedBean implements Serializable {
 
 	/**
 	 * 
@@ -37,8 +37,10 @@ public class SchudelerManagedBean implements Serializable {
 
 	private ScheduleEvent event = new DefaultScheduleEvent();
 
-	public SchudelerManagedBean() {
+	public SchedulerManagedBean() {
+
 		eventModel = new DefaultScheduleModel();
+
 		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
 				previousDay8Pm(), previousDay11Pm()));
 		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party",
@@ -159,10 +161,12 @@ public class SchudelerManagedBean implements Serializable {
 	}
 
 	public void addEvent(ActionEvent actionEvent) {
-		if (event.getId() == null)
+		if (event.getId() == null){
 			eventModel.addEvent(event);
-		else
+		}
+		else{
 			eventModel.updateEvent(event);
+		}
 
 		event = new DefaultScheduleEvent();
 	}
