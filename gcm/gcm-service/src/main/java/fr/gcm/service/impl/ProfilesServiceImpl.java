@@ -41,7 +41,7 @@ public class ProfilesServiceImpl implements IProfilesService {
 	 */
 
 	/**
-	 * Inject l'objet profil
+	 * Inject l'objet profiles
 	 * 
 	 * @param profilesRepository
 	 *            profil

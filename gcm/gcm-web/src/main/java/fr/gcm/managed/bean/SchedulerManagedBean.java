@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
@@ -17,6 +18,9 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+
+import fr.gcm.business.objects.BnsObjAppointment;
+import fr.gcm.service.IAppointmentService;
 
 /**
  * 
@@ -33,10 +37,25 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Stock les evenmenet
+	 */
 	private ScheduleModel eventModel;
 
+	/**
+	 * Service appointment
+	 */
+	@ManagedProperty(value = "#{appointmentService}")
+	private IAppointmentService appointmentService;
+	
+	/**
+	 * Evenement
+	 */
 	private ScheduleEvent event = new DefaultScheduleEvent();
 
+	/**
+	 * Initialise les evenmenet stocker en base
+	 */
 	public SchedulerManagedBean() {
 
 		eventModel = new DefaultScheduleModel();
@@ -52,16 +71,26 @@ public class SchedulerManagedBean implements Serializable {
 				fourDaysLater3pm()));
 	}
 
+	/**
+	 * Retourne une date aléatoire
+	 * 
+	 * @param base
+	 *            date
+	 * @return date
+	 */
 	public Date getRandomDate(Date base) {
 		Calendar date = Calendar.getInstance();
 		date.setTime(base);
 		date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1); // set random
 																	// day of
 																	// month
-
 		return date.getTime();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public Date getInitialDate() {
 		Calendar calendar = Calendar.getInstance();
 		calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY,
@@ -160,11 +189,29 @@ public class SchedulerManagedBean implements Serializable {
 		this.event = event;
 	}
 
+	/**
+	 * Ajout des evenements dans le modele ainsi qu'un stockage en base
+	 * 
+	 * @param actionEvent
+	 *            evenement
+	 */
 	public void addEvent(ActionEvent actionEvent) {
-		if (event.getId() == null){
+		if (event.getId() == null) {
 			eventModel.addEvent(event);
-		}
-		else{
+			
+			BnsObjAppointment bnsObjAppointment = new BnsObjAppointment();
+			bnsObjAppointment.setData(event.getData().toString());
+			bnsObjAppointment.setTitle(event.getTitle());
+			bnsObjAppointment.setStartDate(event.getStartDate());
+			bnsObjAppointment.setEndDate(event.getEndDate());
+			
+			
+			appointmentService.addAppointment(bnsObjAppointment);
+			
+			
+		//	Appointment appointment = new fr.gcm.business.objects.Appointment()
+		//	appointmentService
+		} else {
 			eventModel.updateEvent(event);
 		}
 
@@ -198,5 +245,19 @@ public class SchedulerManagedBean implements Serializable {
 
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	/**
+	 * @return the appointmentService
+	 */
+	public IAppointmentService getAppointmentService() {
+		return appointmentService;
+	}
+
+	/**
+	 * @param appointmentService the appointmentService to set
+	 */
+	public void setAppointmentService(IAppointmentService appointmentService) {
+		this.appointmentService = appointmentService;
 	}
 }

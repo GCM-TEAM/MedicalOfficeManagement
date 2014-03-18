@@ -24,7 +24,7 @@ public interface IUserService {
 	void addUser(User user);
 
 	/**
-	 * Retourne l'ensemble des utilisateur
+	 * Retourne l'ensemble des utilisateurs
 	 * 
 	 * @return liste des utilisateurs
 	 */

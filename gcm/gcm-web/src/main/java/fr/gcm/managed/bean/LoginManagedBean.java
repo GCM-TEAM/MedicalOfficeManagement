@@ -39,6 +39,9 @@ public class LoginManagedBean implements Serializable {
 	 */
 	private String password;
 
+	/**
+	 * Service user
+	 */
 	@ManagedProperty(value = "#{userService}")
 	private IUserService userService;
 

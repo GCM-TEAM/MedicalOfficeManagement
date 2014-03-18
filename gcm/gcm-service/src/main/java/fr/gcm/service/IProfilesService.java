@@ -12,7 +12,7 @@ import fr.gcm.model.Profiles;
 public interface IProfilesService {
 	
 	/**
-	 * Ajoute un profil
+	 * Ajoute du service profil
 	 * 
 	 * @param profile
 	 * 				profil

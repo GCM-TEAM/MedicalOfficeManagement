@@ -1,31 +1,22 @@
-package fr.gcm.model;
+package fr.gcm.business.objects;
 
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import fr.gcm.model.Consultation;
+import fr.gcm.model.Patient;
+import fr.gcm.model.User;
 
 /**
  * 
  * @author KBE
  * 
+ * 
+ *         Objet metier appointment
+ * 
  */
 
-@Entity
-@Table(name = "APPOINTMENT")
-@SequenceGenerator(sequenceName = "APPOINTMENT_ID_SEQ", name = "APPOINTMENT_ID_SEQ", allocationSize = 1)
-public class Appointment implements Serializable {
+public class BnsObjAppointment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long appointmentID; // identifiant du RDV
@@ -39,13 +30,16 @@ public class Appointment implements Serializable {
 	/**
 	 * Constructeur : cree une nouvelle instance de : RendezVous
 	 */
-	public Appointment() {
+	public BnsObjAppointment() {
 	}
 
 	/*
 	 * override hashCode, equals & toString
 	 */
 
+	/**
+	 * 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -81,29 +75,42 @@ public class Appointment implements Serializable {
 	 * getter & setter
 	 */
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "APPOINTMENT_ID_SEQ")
-	@Column(name = "APPOINTMENTID", unique = true, nullable = false)
+	/**
+	 * 
+	 * @return
+	 */
 	public Long getAppointmentID() {
 		return appointmentID;
 	}
 
+	/**
+	 * 
+	 * @param appointmentID
+	 */
 	public void setAppointmentID(Long appointmentID) {
 		this.appointmentID = appointmentID;
 	}
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "STARTDATE", unique = true, nullable = false)
+	/**
+	 * 
+	 * @return
+	 */
 	public Date getStartDate() {
 		return startDate;
 	}
 
+	/**
+	 * 
+	 * @param startDate
+	 */
 	public void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "PATIENTID")
+//	/**
+//	 * 
+//	 * @return
+//	 */
 //	public Patient getPatient() {
 //		return patient;
 //	}
@@ -115,8 +122,6 @@ public class Appointment implements Serializable {
 	/**
 	 * @return the endDate
 	 */
-	@Temporal(TemporalType.DATE)
-	@Column(name = "ENDDATE", unique = true, nullable = false)
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -132,7 +137,6 @@ public class Appointment implements Serializable {
 	/**
 	 * @return the data
 	 */
-	@Column(name = "DATA")
 	public String getData() {
 		return data;
 	}
@@ -148,13 +152,13 @@ public class Appointment implements Serializable {
 	/**
 	 * @return the title
 	 */
-	@Column(name = "TITLE")
 	public String getTitle() {
 		return Title;
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		Title = title;
