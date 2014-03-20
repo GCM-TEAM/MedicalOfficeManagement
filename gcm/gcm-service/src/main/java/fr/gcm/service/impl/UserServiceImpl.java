@@ -39,9 +39,9 @@ public class UserServiceImpl implements IUserService {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean verifyUserExistance(String login) {
+	public boolean findUserByLogin(String login) {
 
-		if (userRepository.getUserByLoginAndPwd(login) != null) {
+		if (userRepository.findUserByLogin(login) != null) {
 			return true;
 		}
 		return false;
@@ -51,8 +51,8 @@ public class UserServiceImpl implements IUserService {
 	 * Retourner la liste des utilisateurs
 	 */
 	@Override
-	public List<User> findAll() {
-		return userRepository.findAll();
+	public List<User> findAllUsers() {
+		return userRepository.findAllUsers();
 	}
 
 	/*

@@ -5,12 +5,9 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -29,6 +26,7 @@ public class Appointment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long appointmentID; // identifiant du RDV
+	private String eventID; // identifiant de l'evenenment de la calendrier
 	private Date startDate; // date de début de RDV
 	private String data; // commentaire
 	private Date endDate; // date de fin de RDV
@@ -158,6 +156,21 @@ public class Appointment implements Serializable {
 	 */
 	public void setTitle(String title) {
 		Title = title;
+	}
+
+	/**
+	 * @return the eventID
+	 */
+	@Column(name = "EVENTID", unique = true)
+	public String getEventID() {
+		return eventID;
+	}
+
+	/**
+	 * @param eventID the eventID to set
+	 */
+	public void setEventID(String eventID) {
+		this.eventID = eventID;
 	}
 
 	// @ManyToOne(fetch = FetchType.LAZY)

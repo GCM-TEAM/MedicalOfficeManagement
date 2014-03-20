@@ -1,10 +1,11 @@
 package fr.gcm.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.gcm.business.objects.BnsObjAppointment;
 import fr.gcm.dao.IAppointmentRepsitory;
 import fr.gcm.model.Appointment;
 import fr.gcm.service.IAppointmentService;
@@ -26,11 +27,31 @@ public class AppointmentService implements IAppointmentService {
 	private IAppointmentRepsitory appointmentRepository;
 
 	@Override
-	public void addAppointment(BnsObjAppointment bnsObjAppointment) {
+	public void addAppointment(Appointment bnsObjAppointment) {
 
 		if (bnsObjAppointment != null) {
 			appointmentRepository.addAppointment(bnsObjAppointment);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Appointment> findAllApointments() {
+		return appointmentRepository.findAllApointments();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean updateAppointment(Appointment bnsObjAppointment) {
+
+		if (bnsObjAppointment != null) {
+			return appointmentRepository.updateAppointment(bnsObjAppointment);
+		}
+		return false;
 	}
 
 	/*
@@ -45,4 +66,5 @@ public class AppointmentService implements IAppointmentService {
 			IAppointmentRepsitory appointmentRepository) {
 		this.appointmentRepository = appointmentRepository;
 	}
+
 }

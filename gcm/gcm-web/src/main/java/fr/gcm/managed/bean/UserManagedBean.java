@@ -79,7 +79,7 @@ public class UserManagedBean extends CommunActions implements Serializable {
 	public List<User> getListUsers() {
 		List<User> users = null;
 		try {
-			users = userService.findAll();
+			users = userService.findAllUsers();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

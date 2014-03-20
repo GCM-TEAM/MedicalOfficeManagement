@@ -1,5 +1,8 @@
 package fr.gcm.dao.impl;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -9,7 +12,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import fr.gcm.business.objects.BnsObjAppointment;
 import fr.gcm.dao.IAppointmentRepsitory;
 import fr.gcm.model.Appointment;
 
@@ -27,7 +29,7 @@ import fr.gcm.model.Appointment;
 public class AppointmentRepositoryImpl implements IAppointmentRepsitory {
 
 	private static final Logger LOGGER = LoggerFactory
-			.getLogger(ProfilesRepositoryImpl.class);
+			.getLogger(AppointmentRepositoryImpl.class);
 
 	/**
 	 * Fabrique de session hibernate
@@ -38,14 +40,71 @@ public class AppointmentRepositoryImpl implements IAppointmentRepsitory {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void addAppointment(BnsObjAppointment bnsObjAppointment) {
+	public void addAppointment(Appointment bnsObjAppointment) {
 
 		try {
 			getSessionFactory().saveOrUpdate(bnsObjAppointment);
-			LOGGER.info("Insertion d'un RDV");
+			LOGGER.info("RDV inseré avec succes");
 		} catch (DataAccessException e) {
 			LOGGER.error("Erreur lors de l'insertion du RDV", e);
 		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Appointment> findAllApointments() {
+
+		Query appointmentQuery = null;
+
+		try {
+
+			appointmentQuery = getSessionFactory().createQuery(
+					"from Appointment");
+
+		} catch (DataAccessException e) {
+			LOGGER.error("Erreur lors de l'extraction des RDV", e);
+		}
+
+		return appointmentQuery.list();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean updateAppointment(Appointment bnsObjAppointment) {
+		Query appointmentQuery = null;
+
+		try {
+
+			appointmentQuery = getSessionFactory()
+					.createQuery(
+							"update Appointment set Title = :Title , data = :data, startDate = :startDate, endDate = :endDate where eventID = :eventID");
+
+			appointmentQuery.setParameter("eventID",
+					bnsObjAppointment.getEventID());
+			appointmentQuery
+					.setParameter("Title", bnsObjAppointment.getTitle());
+			appointmentQuery.setParameter("data", bnsObjAppointment.getData());
+			appointmentQuery.setParameter("startDate",
+					bnsObjAppointment.getStartDate());
+			appointmentQuery.setParameter("endDate",
+					bnsObjAppointment.getEndDate());
+
+			appointmentQuery.executeUpdate();
+
+			LOGGER.info("RDV mis à jour avec succes");
+
+			return true;
+
+		} catch (DataAccessException e) {
+			LOGGER.error("Erreur lors de la mise à jour du RDV", e);
+		}
+
+		return false;
 	}
 
 	/*

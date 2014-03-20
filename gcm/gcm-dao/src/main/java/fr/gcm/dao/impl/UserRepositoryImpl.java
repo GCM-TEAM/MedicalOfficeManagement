@@ -63,24 +63,24 @@ public class UserRepositoryImpl implements IUserRepository {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> findAll() {
+	public List<User> findAllUsers() {
 
-		List<User> list = null;
+		Query loginQuery = null;
 		try {
 
-			list = getSessionFactory().createQuery("from User").list();
+			loginQuery = getSessionFactory().createQuery("from User");
 
 		} catch (DataAccessException e) {
 			LOGGER.error("Erreur lors de l'extraction de l'objet user", e);
 		}
-		return list;
+		return loginQuery.list();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User getUserByLoginAndPwd(String login) {
+	public User findUserByLogin(String login) {
 
 		Query loginQuery = null;
 		try {

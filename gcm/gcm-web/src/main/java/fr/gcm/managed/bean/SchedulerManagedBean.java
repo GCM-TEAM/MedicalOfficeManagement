@@ -19,7 +19,7 @@ import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
 
-import fr.gcm.business.objects.BnsObjAppointment;
+import fr.gcm.model.Appointment;
 import fr.gcm.service.IAppointmentService;
 
 /**
@@ -47,7 +47,7 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	@ManagedProperty(value = "#{appointmentService}")
 	private IAppointmentService appointmentService;
-	
+
 	/**
 	 * Evenement
 	 */
@@ -59,127 +59,24 @@ public class SchedulerManagedBean implements Serializable {
 	public SchedulerManagedBean() {
 
 		eventModel = new DefaultScheduleModel();
+		
+		
+		for(Appointment appointment : appointmentService.findAllApointments() ){
+			
+		}
+		
 
-		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
-				previousDay8Pm(), previousDay11Pm()));
-		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party",
-				today1Pm(), today6Pm()));
-		eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys",
-				nextDay9Am(), nextDay11Am()));
-		eventModel.addEvent(new DefaultScheduleEvent(
-				"Plant the new garden stuff", theDayAfter3Pm(),
-				fourDaysLater3pm()));
+//		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
+//				previousDay8Pm(), previousDay11Pm()));
+//		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party",
+//				today1Pm(), today6Pm()));
+//		eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys",
+//				nextDay9Am(), nextDay11Am()));
+//		eventModel.addEvent(new DefaultScheduleEvent(
+//				"Plant the new garden stuff", theDayAfter3Pm(),
+//				fourDaysLater3pm()));
 	}
 
-	/**
-	 * Retourne une date aléatoire
-	 * 
-	 * @param base
-	 *            date
-	 * @return date
-	 */
-	public Date getRandomDate(Date base) {
-		Calendar date = Calendar.getInstance();
-		date.setTime(base);
-		date.add(Calendar.DATE, ((int) (Math.random() * 30)) + 1); // set random
-																	// day of
-																	// month
-		return date.getTime();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public Date getInitialDate() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), Calendar.FEBRUARY,
-				calendar.get(Calendar.DATE), 0, 0, 0);
-
-		return calendar.getTime();
-	}
-
-	public ScheduleModel getEventModel() {
-		return eventModel;
-	}
-
-	private Calendar today() {
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),
-				calendar.get(Calendar.DATE), 0, 0, 0);
-
-		return calendar;
-	}
-
-	private Date previousDay8Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-		t.set(Calendar.HOUR, 8);
-
-		return t.getTime();
-	}
-
-	private Date previousDay11Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) - 1);
-		t.set(Calendar.HOUR, 11);
-
-		return t.getTime();
-	}
-
-	private Date today1Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 1);
-
-		return t.getTime();
-	}
-
-	private Date theDayAfter3Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 2);
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 3);
-
-		return t.getTime();
-	}
-
-	private Date today6Pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.HOUR, 6);
-
-		return t.getTime();
-	}
-
-	private Date nextDay9Am() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.AM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-		t.set(Calendar.HOUR, 9);
-
-		return t.getTime();
-	}
-
-	private Date nextDay11Am() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.AM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 1);
-		t.set(Calendar.HOUR, 11);
-
-		return t.getTime();
-	}
-
-	private Date fourDaysLater3pm() {
-		Calendar t = (Calendar) today().clone();
-		t.set(Calendar.AM_PM, Calendar.PM);
-		t.set(Calendar.DATE, t.get(Calendar.DATE) + 4);
-		t.set(Calendar.HOUR, 3);
-
-		return t.getTime();
-	}
 
 	public ScheduleEvent getEvent() {
 		return event;
@@ -196,23 +93,43 @@ public class SchedulerManagedBean implements Serializable {
 	 *            evenement
 	 */
 	public void addEvent(ActionEvent actionEvent) {
-		if (event.getId() == null) {
-			eventModel.addEvent(event);
-			
-			BnsObjAppointment bnsObjAppointment = new BnsObjAppointment();
+
+		Appointment bnsObjAppointment = new Appointment();
+
+		if (event.getData() != null) {
 			bnsObjAppointment.setData(event.getData().toString());
+		}
+
+		if (event.getTitle() != null) {
 			bnsObjAppointment.setTitle(event.getTitle());
-			bnsObjAppointment.setStartDate(event.getStartDate());
-			bnsObjAppointment.setEndDate(event.getEndDate());
+		}
+		bnsObjAppointment.setStartDate(event.getStartDate());
+		bnsObjAppointment.setEndDate(event.getEndDate());
+
+		if (event.getId() == null) {
 			
-			
+			eventModel.addEvent(event);
+
+			bnsObjAppointment.setEventID(event.getId());
 			appointmentService.addAppointment(bnsObjAppointment);
-			
-			
-		//	Appointment appointment = new fr.gcm.business.objects.Appointment()
-		//	appointmentService
+
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Event add", "even: " + event.getTitle());
+
+			addMessage(message);
+
+
 		} else {
+			
+			bnsObjAppointment.setEventID(event.getId());
 			eventModel.updateEvent(event);
+
+			appointmentService.updateAppointment(bnsObjAppointment);
+
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Event updated", "new event: " + event.getTitle());
+
+			addMessage(message);
 		}
 
 		event = new DefaultScheduleEvent();
@@ -255,7 +172,8 @@ public class SchedulerManagedBean implements Serializable {
 	}
 
 	/**
-	 * @param appointmentService the appointmentService to set
+	 * @param appointmentService
+	 *            the appointmentService to set
 	 */
 	public void setAppointmentService(IAppointmentService appointmentService) {
 		this.appointmentService = appointmentService;

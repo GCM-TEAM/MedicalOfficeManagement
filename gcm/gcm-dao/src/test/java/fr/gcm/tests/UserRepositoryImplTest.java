@@ -29,4 +29,6 @@ public class UserRepositoryImplTest
 		userRepository.addUser(user);
 		assertNotNull(user.getUserID());
 	}
+	
+	
 }

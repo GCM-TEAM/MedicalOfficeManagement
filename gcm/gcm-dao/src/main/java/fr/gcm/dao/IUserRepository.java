@@ -27,7 +27,7 @@ public interface IUserRepository {
 	 * 
 	 * @return liste des utilisateur
 	 */
-	List<User> findAll();
+	List<User> findAllUsers();
 
 	/**
 	 * Identifie un utilisateur
@@ -36,5 +36,5 @@ public interface IUserRepository {
 	 *            login
 	 * @return user 
 	 */
-	User getUserByLoginAndPwd(String login);
+	User findUserByLogin(String login);
 }

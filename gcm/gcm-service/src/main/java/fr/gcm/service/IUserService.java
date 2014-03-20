@@ -28,7 +28,7 @@ public interface IUserService {
 	 * 
 	 * @return liste des utilisateurs
 	 */
-	List<User> findAll();
+	List<User> findAllUsers();
 
 	/**
 	 * Verifie l'existance de l'utilisateur en base
@@ -37,6 +37,6 @@ public interface IUserService {
 	 *            login
 	 * @return boolean
 	 */
-	boolean verifyUserExistance(String login);
+	boolean findUserByLogin(String login);
 
 }

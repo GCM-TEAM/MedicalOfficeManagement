@@ -59,7 +59,7 @@ public class LoginManagedBean implements Serializable {
 
 		if (login != null && password != null) {
 
-			if (userService.verifyUserExistance(login)) {
+			if (userService.findUserByLogin(login)) {
 
 				HttpSession session = ManagedSession.getSession();
 				session.setAttribute("login", login);

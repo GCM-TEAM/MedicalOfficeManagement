@@ -1,6 +1,8 @@
 package fr.gcm.service;
 
-import fr.gcm.business.objects.BnsObjAppointment;
+import java.util.List;
+
+import fr.gcm.model.Appointment;
 
 /**
  * 
@@ -17,5 +19,23 @@ public interface IAppointmentService {
 	 * @param bnsObjAppointment
 	 *            RDV metier
 	 */
-	void addAppointment(BnsObjAppointment bnsObjAppointment);
+	void addAppointment(Appointment bnsObjAppointment);
+	
+	/**
+	 * Mise à jour du RDV
+	 * 
+	 * @param bnsObjAppointment
+	 *            RDV
+	 *            
+	 * retrun boolean
+	 */
+	boolean updateAppointment(Appointment bnsObjAppointment);
+	
+	
+	/**
+	 * Retoune une liste de RDV
+	 * 
+	 * @return list
+	 */
+	List<Appointment> findAllApointments();
 }
