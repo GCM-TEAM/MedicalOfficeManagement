@@ -1,9 +1,10 @@
 package fr.gcm.managed.bean;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -57,26 +58,22 @@ public class SchedulerManagedBean implements Serializable {
 	 * Initialise les evenmenet stocker en base
 	 */
 	public SchedulerManagedBean() {
-
 		eventModel = new DefaultScheduleModel();
-		
-		
-		for(Appointment appointment : appointmentService.findAllApointments() ){
-			
-		}
-		
-
-//		eventModel.addEvent(new DefaultScheduleEvent("Champions League Match",
-//				previousDay8Pm(), previousDay11Pm()));
-//		eventModel.addEvent(new DefaultScheduleEvent("Birthday Party",
-//				today1Pm(), today6Pm()));
-//		eventModel.addEvent(new DefaultScheduleEvent("Breakfast at Tiffanys",
-//				nextDay9Am(), nextDay11Am()));
-//		eventModel.addEvent(new DefaultScheduleEvent(
-//				"Plant the new garden stuff", theDayAfter3Pm(),
-//				fourDaysLater3pm()));
 	}
 
+	/**
+	 * Initialisation des RDV aprés la création de l'objet scheduler
+	 */
+	@PostConstruct
+	private void init() {
+		List<Appointment> appointments = appointmentService
+				.findAllApointments();
+		for (Appointment appointment : appointments) {
+			eventModel.addEvent(new DefaultScheduleEvent(
+					appointment.getTitle(), appointment.getStartDate(),
+					appointment.getEndDate()));
+		}
+	}
 
 	public ScheduleEvent getEvent() {
 		return event;
@@ -107,7 +104,7 @@ public class SchedulerManagedBean implements Serializable {
 		bnsObjAppointment.setEndDate(event.getEndDate());
 
 		if (event.getId() == null) {
-			
+
 			eventModel.addEvent(event);
 
 			bnsObjAppointment.setEventID(event.getId());
@@ -118,9 +115,8 @@ public class SchedulerManagedBean implements Serializable {
 
 			addMessage(message);
 
-
 		} else {
-			
+
 			bnsObjAppointment.setEventID(event.getId());
 			eventModel.updateEvent(event);
 
@@ -177,5 +173,20 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	public void setAppointmentService(IAppointmentService appointmentService) {
 		this.appointmentService = appointmentService;
+	}
+
+	/**
+	 * @return the eventModel
+	 */
+	public ScheduleModel getEventModel() {
+		return eventModel;
+	}
+
+	/**
+	 * @param eventModel
+	 *            the eventModel to set
+	 */
+	public void setEventModel(ScheduleModel eventModel) {
+		this.eventModel = eventModel;
 	}
 }

@@ -30,7 +30,7 @@ public class AppointmentRepositoryImplTest {
 		bnsObjAppointment.setStartDate(new Date());
 		bnsObjAppointment.setEndDate(new Date());
 		bnsObjAppointment.setTitle("mounir");
-		
+
 	}
 
 	@After
@@ -45,9 +45,12 @@ public class AppointmentRepositoryImplTest {
 
 	@Test
 	public void testUpdateAppointment() {
-
 		bnsObjAppointment.setEventID("61981e87-f508-4707-8a51-d51eef9dcae5");
 		assertTrue(appointmentRepository.updateAppointment(bnsObjAppointment));
 	}
 
+	@Test
+	public void testFindAllApointments() {
+		assertNotNull(appointmentRepository.findAllApointments());
+	}
 }
