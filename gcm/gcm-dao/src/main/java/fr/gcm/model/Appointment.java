@@ -90,7 +90,7 @@ public class Appointment implements Serializable {
 		this.appointmentID = appointmentID;
 	}
 
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "STARTDATE", unique = true, nullable = false)
 	public Date getStartDate() {
 		return startDate;
@@ -113,7 +113,7 @@ public class Appointment implements Serializable {
 	/**
 	 * @return the endDate
 	 */
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "ENDDATE", unique = true, nullable = false)
 	public Date getEndDate() {
 		return endDate;

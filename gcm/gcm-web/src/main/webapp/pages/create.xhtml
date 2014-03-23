@@ -10,64 +10,13 @@
 </h:head>
 
 <h:body>
-
-	<h:form>
 	
-		<p:menubar>
-			<p:submenu label="File" icon="ui-icon-document">
-				<p:submenu label="New" icon="ui-icon-contact">
-					<p:menuitem value="Project" url="#" />
-					<p:menuitem value="Other" url="#" />
-				</p:submenu>
-				<p:menuitem value="Open" url="#" />
-				<p:separator />
-				<p:menuitem value="Quit" url="#" />
-			</p:submenu>
-
-			<p:submenu label="Edit" icon="ui-icon-pencil">
-				<p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
-				<p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
-			</p:submenu>
-
-			<p:submenu label="Help" icon="ui-icon-help">
-				<p:menuitem value="Contents" url="#" />
-				<p:submenu label="Search" icon="ui-icon-search">
-					<p:submenu label="Text">
-						<p:menuitem value="Workspace" url="#" />
-					</p:submenu>
-					<p:menuitem value="File" url="#" />
-				</p:submenu>
-			</p:submenu>
-
-			<p:submenu label="Actions" icon="ui-icon-gear">
-				<p:submenu label="Ajax" icon="ui-icon-refresh">
-					<p:menuitem value="Save" actionListener="#{menuBean.save}"
-						icon="ui-icon-disk"  />
-					<p:menuitem value="Update" actionListener="#{menuBean.update}"
-						icon="ui-icon-arrowrefresh-1-w" />
-				</p:submenu>
-				<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
-					<p:menuitem value="Delete" actionListener="#{menuBean.delete}"
-						icon="ui-icon-close" ajax="false" />
-				</p:submenu>
-			</p:submenu>
-
-			<f:facet name="options">
-				<p:inputText style="margin-right:10px" />
-				<p:commandButton value="Logout" icon="ui-icon-extlink"
-					action="#{userMB.logout}" />
-			</f:facet>
-		</p:menubar>
-	</h:form>
-
-
 	<p:panel id="panel" header="New User" style="margin-bottom:10px;">
 
 		<h:form id="form">
-		
 			<p:growl id = "messagesCreate"  showDetail="true" life="3000"/> 
-
-			<h:panelGrid columns="3">
+			
+			<h:panelGrid columns="1">
 				<h:outputLabel for="firstName" value="Firstname: *" />
 				<p:inputText id="firstName" value="#{userMB.firstName}"
 					required="true" label="Firstname">
@@ -104,22 +53,10 @@
 				<p:messages for="profile" />
 			</h:panelGrid>
 			
-			
 			<p:commandButton value="Add User" update="messagesCreate" id="addUser"
 			actionListener="#{userMB.addUser}" title="Add user" />
 
 		</h:form>
-		
 	</p:panel>
-
-	<h:form>
-
-		<p:commandButton value="List User" id="listUser"
-			action="/pages/listUsers.xhtml?faces-redirect=true" title="list user" />
-
-
-	</h:form>
-
 </h:body>
-
 </html>

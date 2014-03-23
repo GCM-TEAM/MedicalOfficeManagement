@@ -29,7 +29,7 @@ import fr.gcm.service.IAppointmentService;
  * 
  *         Permet de planifier un rendez vous avec le(s) medecin(s).
  */
-@ManagedBean(name = "schudelerMB")
+@ManagedBean(name = "scheduleMB")
 @SessionScoped
 public class SchedulerManagedBean implements Serializable {
 
@@ -42,6 +42,16 @@ public class SchedulerManagedBean implements Serializable {
 	 * Stock les evenmenet
 	 */
 	private ScheduleModel eventModel;
+	
+	private String 	firstName;	 	// le pr�nom du patient
+	private String 	lastName;		// le nom du patient
+	private String 	maidenName;		// le nom de jeune fille
+	private String 	address;		// l'adresse du patient
+	private Long 	socialNumber;	// le numero de s�curit� sociale
+	private String 	phoneNumber;	// le numero de t�l�phone du patient
+	private Date 	birthDay;		// la date de naissance du patient
+	private String 	sex;			// le sex du patient
+
 
 	/**
 	 * Service appointment
@@ -97,40 +107,26 @@ public class SchedulerManagedBean implements Serializable {
 			bnsObjAppointment.setData(event.getData().toString());
 		}
 
-		if (event.getTitle() != null) {
-			bnsObjAppointment.setTitle(event.getTitle());
-		}
+		bnsObjAppointment.setTitle(event.getTitle());
 		bnsObjAppointment.setStartDate(event.getStartDate());
 		bnsObjAppointment.setEndDate(event.getEndDate());
 
 		if (event.getId() == null) {
-
 			eventModel.addEvent(event);
-
 			bnsObjAppointment.setEventID(event.getId());
 			appointmentService.addAppointment(bnsObjAppointment);
-
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Event add", "even: " + event.getTitle());
-
-			addMessage(message);
-
 		} else {
-
 			bnsObjAppointment.setEventID(event.getId());
 			eventModel.updateEvent(event);
-
 			appointmentService.updateAppointment(bnsObjAppointment);
-
-			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Event updated", "new event: " + event.getTitle());
-
-			addMessage(message);
 		}
-
 		event = new DefaultScheduleEvent();
 	}
 
+	/**
+	 * 
+	 * @param selectEvent
+	 */
 	public void onEventSelect(SelectEvent selectEvent) {
 		event = (ScheduleEvent) selectEvent.getObject();
 	}
@@ -149,6 +145,20 @@ public class SchedulerManagedBean implements Serializable {
 	}
 
 	public void onEventResize(ScheduleEntryResizeEvent event) {
+
+		Appointment bnsObjAppointment = new Appointment();
+
+		if (event.getScheduleEvent().getData() != null) {
+			bnsObjAppointment.setData(event.getScheduleEvent().getData()
+					.toString());
+		}
+		bnsObjAppointment.setEventID(event.getScheduleEvent().getId());
+		bnsObjAppointment.setTitle(event.getScheduleEvent().getTitle());
+		bnsObjAppointment.setStartDate(event.getScheduleEvent().getStartDate());
+		bnsObjAppointment.setEndDate(event.getScheduleEvent().getEndDate());
+		
+		appointmentService.updateAppointment(bnsObjAppointment);
+
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Event resized", "Day delta:" + event.getDayDelta()
 						+ ", Minute delta:" + event.getMinuteDelta());
@@ -188,5 +198,117 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	public void setEventModel(ScheduleModel eventModel) {
 		this.eventModel = eventModel;
+	}
+
+	/**
+	 * @return the firstName
+	 */
+	public String getFirstName() {
+		return firstName;
+	}
+
+	/**
+	 * @param firstName the firstName to set
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	/**
+	 * @return the lastName
+	 */
+	public String getLastName() {
+		return lastName;
+	}
+
+	/**
+	 * @param lastName the lastName to set
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	/**
+	 * @return the maidenName
+	 */
+	public String getMaidenName() {
+		return maidenName;
+	}
+
+	/**
+	 * @param maidenName the maidenName to set
+	 */
+	public void setMaidenName(String maidenName) {
+		this.maidenName = maidenName;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the socialNumber
+	 */
+	public Long getSocialNumber() {
+		return socialNumber;
+	}
+
+	/**
+	 * @param socialNumber the socialNumber to set
+	 */
+	public void setSocialNumber(Long socialNumber) {
+		this.socialNumber = socialNumber;
+	}
+
+	/**
+	 * @return the phoneNumber
+	 */
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	/**
+	 * @param phoneNumber the phoneNumber to set
+	 */
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	/**
+	 * @return the birthDay
+	 */
+	public Date getBirthDay() {
+		return birthDay;
+	}
+
+	/**
+	 * @param birthDay the birthDay to set
+	 */
+	public void setBirthDay(Date birthDay) {
+		this.birthDay = birthDay;
+	}
+
+	/**
+	 * @return the sex
+	 */
+	public String getSex() {
+		return sex;
+	}
+
+	/**
+	 * @param sex the sex to set
+	 */
+	public void setSex(String sex) {
+		this.sex = sex;
 	}
 }

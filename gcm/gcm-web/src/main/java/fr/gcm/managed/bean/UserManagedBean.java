@@ -15,7 +15,6 @@ import fr.gcm.model.Profiles;
 import fr.gcm.model.User;
 import fr.gcm.service.IProfilesService;
 import fr.gcm.service.IUserService;
-import fr.gcm.session.authentication.CommunActions;
 
 /**
  * 
@@ -27,7 +26,7 @@ import fr.gcm.session.authentication.CommunActions;
 
 @ManagedBean(name = "userMB")
 @RequestScoped
-public class UserManagedBean extends CommunActions implements Serializable {
+public class UserManagedBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String firstName;

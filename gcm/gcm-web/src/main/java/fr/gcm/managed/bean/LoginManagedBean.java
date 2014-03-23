@@ -71,7 +71,7 @@ public class LoginManagedBean implements Serializable {
 
 				context.addCallbackParam("loggedIn", loggedIn);
 
-				return "/pages/create.xhtml?faces-redirect=true";
+				return "/pages/main.xhtml?faces-redirect=true";
 			}
 		}
 
