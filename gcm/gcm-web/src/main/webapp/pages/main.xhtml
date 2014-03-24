@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+
+
+<h:head>
+	<title><ui:insert name="title">Menu</ui:insert></title>
+</h:head>
+
+
+<h:body>
+
+	<h:form>
+		<p:menubar>
+			<p:submenu label="File" icon="ui-icon-document">
+				<p:submenu label="New" icon="ui-icon-contact">
+					<p:menuitem value="Project" url="#" />
+					<p:menuitem value="Other" url="#" />
+				</p:submenu>
+				<p:menuitem value="Open" url="#" />
+				<p:separator />
+				<p:menuitem value="Quit" url="#" />
+			</p:submenu>
+
+			<p:submenu label="Edit" icon="ui-icon-pencil">
+				<p:menuitem value="Undo" url="#" icon="ui-icon-arrowreturnthick-1-w" />
+				<p:menuitem value="Redo" url="#" icon="ui-icon-arrowreturnthick-1-e" />
+			</p:submenu>
+
+			<p:submenu label="Help" icon="ui-icon-help">
+				<p:menuitem value="Contents" url="#" />
+				<p:submenu label="Search" icon="ui-icon-search">
+					<p:submenu label="Text">
+						<p:menuitem value="Workspace" url="#" />
+					</p:submenu>
+					<p:menuitem value="File" url="#" />
+				</p:submenu>
+			</p:submenu>
+
+			<p:submenu label="Actions" icon="ui-icon-gear">
+				<p:submenu label="Ajax" icon="ui-icon-refresh">
+					<p:menuitem value="Save" actionListener="#{menuBean.save}"
+						icon="ui-icon-disk" />
+					<p:menuitem value="Update" actionListener="#{menuBean.update}"
+						icon="ui-icon-arrowrefresh-1-w" />
+				</p:submenu>
+				<p:submenu label="Non-Ajax" icon="ui-icon-newwin">
+					<p:menuitem value="Delete" actionListener="#{menuBean.delete}"
+						icon="ui-icon-close" ajax="false" />
+				</p:submenu>
+			</p:submenu>
+
+			<f:facet name="options">
+				<p:inputText style="margin-right:10px" />
+				<p:commandButton value="Logout" icon="ui-icon-extlink"
+					action="#{mainActionsMB.logout}" />
+			</f:facet>
+		</p:menubar>
+
+	</h:form>
+	
+		<p:tabView id="mainTabView" dynamic="false" cache="true" scrollable="true" >
+
+			<p:tab id="tab1" title="Rendez-Vous">
+
+				<f:subview id="appointSubView">
+					<ui:include src="appointments.xhtml" />
+				</f:subview>
+			</p:tab>
+
+			<p:tab id="tab2" title="Administration">
+
+				<f:subview id="createSubView">
+					<ui:include src="create.xhtml" />
+				</f:subview>
+			</p:tab>
+
+			<p:tab id="tab3" title="Liste des utilisateurs">
+
+				<f:subview id="listUsersSubView">
+					<ui:include src="listUsers.xhtml" />
+				</f:subview>
+			</p:tab>
+
+		</p:tabView>
+</h:body>
+</html>
