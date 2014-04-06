@@ -4,7 +4,7 @@
   <parent>
     <groupId>fr.gcm</groupId>
     <artifactId>gcm</artifactId>
-    <version>1.0.1-RELEASE</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
   <dependencies>
   	<dependency>
