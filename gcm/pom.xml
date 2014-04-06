@@ -6,13 +6,22 @@
 	<artifactId>gcm</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<modules>
-		<module>gcm-dao</module>
-		<module>gcm-service</module>
-		<module>gcm-web</module>
-		<!-- module>gcm-ear</module -->
-	</modules>
 
+
+	<profiles>
+
+		<profile>
+			<id>all</id>
+
+			<modules>
+				<module>gcm-dao</module>
+				<module>gcm-service</module>
+				<module>gcm-web</module>
+			</modules>
+
+		</profile>
+
+	</profiles>
 
 	<properties>
 		<spring.version>3.2.3.RELEASE</spring.version>
@@ -48,7 +57,7 @@
 		</plugins>
 	</build>
 
-	
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- Junit dependencies -->
