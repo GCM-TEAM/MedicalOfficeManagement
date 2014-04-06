@@ -9,10 +9,6 @@
 
 
 
-	<modules>
-		<module>gcm-dao</module>
-		<module>gcm-service</module>
-	</modules>
 
 	<profiles>
 
@@ -20,6 +16,8 @@
 			<id>web</id>
 
 			<modules>
+				<module>gcm-dao</module>
+				<module>gcm-service</module>
 				<module>gcm-web</module>
 			</modules>
 
@@ -123,7 +121,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 	<scm>
 		<connection>scm:git:https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</connection>
 		<developerConnection>scm:git:https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</developerConnection>
