@@ -8,14 +8,18 @@
 	<packaging>pom</packaging>
 
 
+
+	<modules>
+		<module>gcm-dao</module>
+		<module>gcm-service</module>
+	</modules>
+
 	<profiles>
 
 		<profile>
-			<id>all</id>
+			<id>web</id>
 
 			<modules>
-				<module>gcm-dao</module>
-				<module>gcm-service</module>
 				<module>gcm-web</module>
 			</modules>
 
