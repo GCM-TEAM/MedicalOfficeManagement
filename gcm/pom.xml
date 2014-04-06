@@ -123,6 +123,11 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+	
+	<scm>
+		<connection>scm:git:ssh://github.com/GCM-TEAM/MedicalOfficeManagement.git</connection>
+		<developerConnection>scm:git:ssh://github.com/GCM-TEAM/MedicalOfficeManagement.git</developerConnection>
+		<url>scm:git:ssh://github.com/GCM-TEAM/MedicalOfficeManagement.git</url>
+	</scm>
 
 </project>
