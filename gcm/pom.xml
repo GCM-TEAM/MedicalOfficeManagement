@@ -125,9 +125,9 @@
 	</dependencyManagement>
 	
 	<scm>
-		<connection>scm:git:ssh://github.com/GCM-TEAM/MedicalOfficeManagement.git</connection>
-		<developerConnection>scm:git:ssh://github.com/GCM-TEAM/MedicalOfficeManagement.git</developerConnection>
-		<url>scm:git:ssh://github.com/GCM-TEAM/MedicalOfficeManagement.git</url>
+		<connection>scm:git:https://github.com/GCM-TEAM/MedicalOfficeManagement.git</connection>
+		<developerConnection>scm:git:https://github.com/GCM-TEAM/MedicalOfficeManagement.git</developerConnection>
+		<url>https://github.com/GCM-TEAM/MedicalOfficeManagement.git</url>
 	</scm>
 
 </project>
