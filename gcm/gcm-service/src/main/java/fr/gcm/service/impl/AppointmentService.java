@@ -34,13 +34,6 @@ public class AppointmentService implements IAppointmentService {
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public List<Appointment> findAllApointments() {
-		return appointmentRepository.findAllApointments();
-	}
 
 	/**
 	 * {@inheritDoc}
@@ -52,6 +45,14 @@ public class AppointmentService implements IAppointmentService {
 			return appointmentRepository.updateAppointment(bnsObjAppointment);
 		}
 		return false;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Appointment> findAllApointments() {
+		return appointmentRepository.findAllApointments();
 	}
 
 	/*

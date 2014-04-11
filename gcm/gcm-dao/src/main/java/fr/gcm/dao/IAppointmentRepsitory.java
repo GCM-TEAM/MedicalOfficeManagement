@@ -16,7 +16,7 @@ public interface IAppointmentRepsitory {
 	/**
 	 * Ajour d'un RDV
 	 * 
-	 * @param appointment
+	 * @param bnsObjAppointment
 	 *            RDV
 	 */
 	void addAppointment(Appointment bnsObjAppointment);
@@ -34,7 +34,7 @@ public interface IAppointmentRepsitory {
 	/**
 	 * Retoune une liste de RDV
 	 * 
-	 * @return list
+	 * @return liste des rendez-vous
 	 */
 	List<Appointment> findAllApointments();
 }

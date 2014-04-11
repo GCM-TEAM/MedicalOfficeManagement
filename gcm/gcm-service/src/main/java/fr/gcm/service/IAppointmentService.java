@@ -14,7 +14,7 @@ import fr.gcm.model.Appointment;
 public interface IAppointmentService {
 
 	/**
-	 * Ajout du service RDV
+	 * Service ajout des RDV
 	 * 
 	 * @param bnsObjAppointment
 	 *            RDV metier
@@ -22,7 +22,7 @@ public interface IAppointmentService {
 	void addAppointment(Appointment bnsObjAppointment);
 	
 	/**
-	 * Mise à jour du RDV
+	 * Service mise à jour des RDV
 	 * 
 	 * @param bnsObjAppointment
 	 *            RDV
@@ -33,9 +33,9 @@ public interface IAppointmentService {
 	
 	
 	/**
-	 * Retoune une liste de RDV
+	 * Service retoune l'ensemble des RDV
 	 * 
-	 * @return list
+	 * @return liste des RDV
 	 */
 	List<Appointment> findAllApointments();
 }

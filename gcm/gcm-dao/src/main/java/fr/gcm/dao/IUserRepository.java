@@ -15,7 +15,7 @@ import fr.gcm.model.User;
 
 public interface IUserRepository {
 	/**
-	 * Ajoute un nouveau utilisateur
+	 * Service ajoute d'un nouveau utilisateur
 	 * 
 	 * @param user
 	 *            utilisateur
@@ -23,14 +23,14 @@ public interface IUserRepository {
 	void addUser(User user);
 
 	/**
-	 * Retourne l'ensemble des utilisateurs
+	 * Service retourne l'ensemble des utilisateurs
 	 * 
 	 * @return liste des utilisateur
 	 */
 	List<User> findAllUsers();
 
 	/**
-	 * Identifie un utilisateur
+	 * Service retourne l'identifie des utilisateurs
 	 * 
 	 * @param login
 	 *            login

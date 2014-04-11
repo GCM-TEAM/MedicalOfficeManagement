@@ -8,7 +8,9 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+
 import org.primefaces.context.RequestContext;
+
 import fr.gcm.service.IUserService;
 import fr.gcm.session.authentication.ManagedSession;
 
@@ -85,6 +87,7 @@ public class LoginManagedBean implements Serializable {
 		return "/pages/login.xhtml?faces-redirect=true";
 
 	}
+
 
 	/**
 	 * @return the password

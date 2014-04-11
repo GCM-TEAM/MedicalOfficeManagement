@@ -11,7 +11,7 @@ import fr.gcm.model.Profiles;
 public interface IProfilesRepository {
 	
 	/**
-	 * Ajoute un profil
+	 * Service ajoute profil
 	 * 
 	 * @param profile
 	 * 				profil

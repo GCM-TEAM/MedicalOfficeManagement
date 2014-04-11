@@ -5,9 +5,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,8 +34,9 @@ public class Appointment implements Serializable {
 	private String data; // commentaire
 	private Date endDate; // date de fin de RDV
 	private String Title; // titre
-//	private Patient patient; // patient
-//	private Consultation consultation; // consultation
+	private Patient patient; // patient
+
+	// private Consultation consultation; // consultation
 
 	/**
 	 * Constructeur : cree une nouvelle instance de : RendezVous
@@ -100,15 +104,15 @@ public class Appointment implements Serializable {
 		this.startDate = startDate;
 	}
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "PATIENTID")
-//	public Patient getPatient() {
-//		return patient;
-//	}
-//
-//	public void setPatient(Patient patient) {
-//		this.patient = patient;
-//	}
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PATIENTID")
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
 
 	/**
 	 * @return the endDate
@@ -152,7 +156,8 @@ public class Appointment implements Serializable {
 	}
 
 	/**
-	 * @param title the title to set
+	 * @param title
+	 *            the title to set
 	 */
 	public void setTitle(String title) {
 		Title = title;
@@ -167,7 +172,8 @@ public class Appointment implements Serializable {
 	}
 
 	/**
-	 * @param eventID the eventID to set
+	 * @param eventID
+	 *            the eventID to set
 	 */
 	public void setEventID(String eventID) {
 		this.eventID = eventID;

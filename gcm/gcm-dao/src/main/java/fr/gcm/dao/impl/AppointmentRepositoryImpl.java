@@ -53,27 +53,6 @@ public class AppointmentRepositoryImpl implements IAppointmentRepsitory {
 	/**
 	 * {@inheritDoc}
 	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Appointment> findAllApointments() {
-
-		Query appointmentQuery = null;
-
-		try {
-
-			appointmentQuery = getSessionFactory().createQuery(
-					"from Appointment");
-
-		} catch (DataAccessException e) {
-			LOGGER.error("Erreur lors de l'extraction des RDV", e);
-		}
-
-		return appointmentQuery.list();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean updateAppointment(Appointment bnsObjAppointment) {
 		Query appointmentQuery = null;
@@ -105,6 +84,27 @@ public class AppointmentRepositoryImpl implements IAppointmentRepsitory {
 		}
 
 		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Appointment> findAllApointments() {
+
+		Query appointmentQuery = null;
+
+		try {
+
+			appointmentQuery = getSessionFactory().createQuery(
+					"from Appointment");
+
+		} catch (DataAccessException e) {
+			LOGGER.error("Erreur lors de l'extraction des RDV", e);
+		}
+
+		return appointmentQuery.list();
 	}
 
 	/*
