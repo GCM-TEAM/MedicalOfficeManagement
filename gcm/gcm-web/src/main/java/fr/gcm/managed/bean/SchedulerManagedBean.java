@@ -92,14 +92,7 @@ public class SchedulerManagedBean implements Serializable {
 		}
 	}
 
-	public ScheduleEvent getEvent() {
-		return event;
-	}
-
-	public void setEvent(ScheduleEvent event) {
-		this.event = event;
-	}
-
+	
 	/**
 	 * Ajout des evenements dans le modele ainsi qu'un stockage en base
 	 * 
@@ -176,6 +169,19 @@ public class SchedulerManagedBean implements Serializable {
 
 	private void addMessage(FacesMessage message) {
 		FacesContext.getCurrentInstance().addMessage(null, message);
+	}
+
+	
+
+	/*
+	 * Getters setters
+	 */
+	public ScheduleEvent getEvent() {
+		return event;
+	}
+
+	public void setEvent(ScheduleEvent event) {
+		this.event = event;
 	}
 
 	/**
