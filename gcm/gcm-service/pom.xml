@@ -4,7 +4,7 @@
   <parent>
     <groupId>fr.gcm</groupId>
     <artifactId>gcm</artifactId>
-    <version>${globale.version}</version>
+    <version>1.0.1</version>
   </parent>
   <dependencies>
   	<dependency>
@@ -22,4 +22,8 @@
 		<artifactId>logback-classic</artifactId>
 	</dependency>      
   </dependencies>
+
+  <scm>
+    <tag>gcm-1.0.1</tag>
+  </scm>
 </project>
