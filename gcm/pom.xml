@@ -18,7 +18,7 @@
 		<logback.version>1.0.13</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<compiler.version>2.3.2</compiler.version>
-		<globale.version>1.0.0-SNAPSHOT</globale.version>
+		<globale.version>1.0.2-SNAPSHOT</globale.version>
 	</properties>
 
 	<build>
