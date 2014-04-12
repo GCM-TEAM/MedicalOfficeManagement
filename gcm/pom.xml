@@ -1,29 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.gcm</groupId>
 	<artifactId>gcm</artifactId>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>${globale.version}</version>
 	<packaging>pom</packaging>
 
-
-
-
-	<profiles>
-
-		<profile>
-			<id>web</id>
-
-			<modules>
-				<module>gcm-dao</module>
-				<module>gcm-service</module>
-				<module>gcm-web</module>
-			</modules>
-
-		</profile>
-
-	</profiles>
+	<modules>
+		<module>gcm-dao</module>
+		<module>gcm-service</module>
+		<module>gcm-web</module>
+	</modules>
 
 	<properties>
 		<spring.version>3.2.3.RELEASE</spring.version>
@@ -31,6 +18,7 @@
 		<logback.version>1.0.13</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<compiler.version>2.3.2</compiler.version>
+		<globale.version>1.0.0-SNAPSHOT</globale.version>
 	</properties>
 
 	<build>
@@ -121,11 +109,21 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+	
+	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>test</name>
+			<url>/Volumes/Macintosh HD/mounir/Billel</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
+	
 	<scm>
 		<connection>scm:git:https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</connection>
 		<developerConnection>scm:git:https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</developerConnection>
 		<url>https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</url>
-	</scm>
+	  <tag>gcm-1.0.1</tag>
+  </scm>
 
 </project>

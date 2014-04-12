@@ -22,6 +22,7 @@ import org.primefaces.model.ScheduleModel;
 
 import fr.gcm.model.Appointment;
 import fr.gcm.service.IAppointmentService;
+import fr.gcm.service.IPatientService;
 
 /**
  * 
@@ -58,6 +59,12 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	@ManagedProperty(value = "#{appointmentService}")
 	private IAppointmentService appointmentService;
+	
+	/**
+	 * Service patient
+	 */
+	@ManagedProperty(value = "#{patientService}")
+	private IPatientService patientService;
 
 	/**
 	 * Evenement
@@ -102,6 +109,7 @@ public class SchedulerManagedBean implements Serializable {
 	public void addEvent(ActionEvent actionEvent) {
 
 		Appointment bnsObjAppointment = new Appointment();
+	
 
 		if (event.getData() != null) {
 			bnsObjAppointment.setData(event.getData().toString());
@@ -310,5 +318,19 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	public void setSex(String sex) {
 		this.sex = sex;
+	}
+
+	/**
+	 * @return the patientService
+	 */
+	public IPatientService getPatientService() {
+		return patientService;
+	}
+
+	/**
+	 * @param patientService the patientService to set
+	 */
+	public void setPatientService(IPatientService patientService) {
+		this.patientService = patientService;
 	}
 }

@@ -14,84 +14,86 @@
 
 <h:body>
 
-	<p:growl id="messages" showDetail="true" />
+	<h:form id="form">
+		<p:growl id="messages" showDetail="true" />
 
-	<p:schedule id="schedule" value="#{scheduleMB.eventModel}"
-		widgetVar="myschedule" locale="fr">
+		<p:schedule id="schedule" value="#{scheduleMB.eventModel}"
+			widgetVar="myschedule" locale="fr">
 
-		<p:ajax event="dateSelect" listener="#{scheduleMB.onDateSelect}"
-			update="eventDetails" oncomplete="PF('eventDialog').show()" />
-		<p:ajax event="eventSelect" listener="#{scheduleMB.onEventSelect}"
-			update="eventDetails" oncomplete="PF('eventDialog').show()" />
-		<p:ajax event="eventMove" listener="#{scheduleMB.onEventMove}"
-			update="messages" />
-		<p:ajax event="eventResize" listener="#{scheduleMB.onEventResize}"
-			update="messages" />
+			<p:ajax event="dateSelect" listener="#{scheduleMB.onDateSelect}"
+				update="eventDetails" oncomplete="PF('eventDialog').show()" />
+			<p:ajax event="eventSelect" listener="#{scheduleMB.onEventSelect}"
+				update="eventDetails" oncomplete="PF('eventDialog').show()" />
+			<p:ajax event="eventMove" listener="#{scheduleMB.onEventMove}"
+				update="messages" />
+			<p:ajax event="eventResize" listener="#{scheduleMB.onEventResize}"
+				update="messages" />
 
-	</p:schedule>
-
-
-	<p:dialog widgetVar="eventDialog" header="Details" showEffect="clip"
-		hideEffect="clip">
-
-		<p:panel header="Rendez-Vous">
-			<h:panelGrid id="eventDetails" columns="2">
-				<h:outputLabel for="title" value="Titre: *" />
-				<p:inputText id="title" value="#{scheduleMB.event.title}"
-					required="true" />
-
-				<h:outputLabel for="from" value="Du:" />
-				<p:inputMask id="from" value="#{scheduleMB.event.startDate}"
-					mask="99/99/9999 99:99">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-				</p:inputMask>
+		</p:schedule>
 
 
-				<h:outputLabel for="to" value="Au:" />
-				<p:inputMask id="to" value="#{scheduleMB.event.endDate}"
-					mask="99/99/9999 99:99">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
-				</p:inputMask>
+		<p:dialog widgetVar="eventDialog" header="Details" showEffect="clip"
+			hideEffect="clip">
 
-				<h:outputLabel for="allDay" value="Toute la journée:" />
-				<h:selectBooleanCheckbox id="allDay"
-					value="#{scheduleMB.event.allDay}" />
-			</h:panelGrid>
-		</p:panel>
+			<p:panel header="Rendez-Vous">
+				<h:panelGrid id="eventDetails" columns="2">
+					<h:outputLabel for="title" value="Titre:" />
+					<p:inputText id="title" value="#{scheduleMB.event.title}"
+						required="true" />
+
+					<h:outputLabel for="from" value="Du:" />
+					<p:inputMask id="from" value="#{scheduleMB.event.startDate}"
+						mask="99/99/9999 99:99">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</p:inputMask>
 
 
-		<p:panel header="Patient Info">
+					<h:outputLabel for="to" value="Au:" />
+					<p:inputMask id="to" value="#{scheduleMB.event.endDate}"
+						mask="99/99/9999 99:99">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
+					</p:inputMask>
 
-			<h:panelGrid id="patientInfo" columns="2">
+					<h:outputLabel for="allDay" value="Toute la journée:" />
+					<h:selectBooleanCheckbox id="allDay"
+						value="#{scheduleMB.event.allDay}" />
+				</h:panelGrid>
+			</p:panel>
 
-				<h:outputLabel for="firstName" value="Prénom: *" />
-				<p:inputText id="firstName" value="#{scheduleMB.firstName}" />
-				<h:outputLabel for="lasttName" value="Nom: *" />
-				<p:inputText id="lasttName" value="#{scheduleMB.lastName}" />
-				<h:outputLabel for="maidenName" value="Nom de jeune fille: *" />
-				<p:inputText id="maidenName" value="#{scheduleMB.maidenName}" />
-				<h:outputLabel for="address" value="Adresse: *" />
-				<p:inputText id="address" value="#{scheduleMB.address}" />
-				<h:outputLabel for="socielNumber"
-					value="Numero de securité sociale: *" />
-				<p:inputText id="socielNumber" value="#{scheduleMB.socialNumber}" />
-				<h:outputLabel for="phoneNumber" value="Numero de téléphone: *" />
-				<p:inputText id="phoneNumber" value="#{scheduleMB.phoneNumber}" />
-				<h:outputLabel for="birthDay" value="Date de naissance: *" />
-				<p:inputText id="birthDay" value="#{scheduleMB.birthDay}" />
-				<h:outputLabel for="sex" value="Sex: *" />
-				<p:inputText id="sex" value="#{scheduleMB.sex}" />
 
-			</h:panelGrid>
+			<p:panel header="Patient Info">
 
-		</p:panel>
+				<h:panelGrid id="patientInfo" columns="2">
 
-		<p:commandButton type="reset" value="Effacer" />
-		<p:commandButton id="addButton" value="Sauvegarder"
-			actionListener="#{scheduleMB.addEvent}"
-			oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
-	</p:dialog>
+					<h:outputLabel for="firstName" value="Prénom: *" />
+					<p:inputText id="firstName" value="#{scheduleMB.firstName}" />
+					<h:outputLabel for="lasttName" value="Nom: *" />
+					<p:inputText id="lasttName" value="#{scheduleMB.lastName}" />
+					<h:outputLabel for="maidenName" value="Nom de jeune fille: *" />
+					<p:inputText id="maidenName" value="#{scheduleMB.maidenName}" />
+					<h:outputLabel for="address" value="Adresse: *" />
+					<p:inputText id="address" value="#{scheduleMB.address}" />
+					<h:outputLabel for="socielNumber"
+						value="Numero de securité sociale: *" />
+					<p:inputText id="socielNumber" value="#{scheduleMB.socialNumber}" />
+					<h:outputLabel for="phoneNumber" value="Numero de téléphone: *" />
+					<p:inputText id="phoneNumber" value="#{scheduleMB.phoneNumber}" />
+					<h:outputLabel for="birthDay" value="Date de naissance: *" />
+					<p:inputText id="birthDay" value="#{scheduleMB.birthDay}" />
+					<h:outputLabel for="sex" value="Sex: *" />
+					<p:inputText id="sex" value="#{scheduleMB.sex}" />
 
+				</h:panelGrid>
+
+			</p:panel>
+
+			<p:commandButton type="reset" value="Effacer" />
+			<p:commandButton id="addButton" value="Sauvegarder"
+				actionListener="#{scheduleMB.addEvent}"
+				oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+		</p:dialog>
+
+	</h:form>
 </h:body>
 
 </html>

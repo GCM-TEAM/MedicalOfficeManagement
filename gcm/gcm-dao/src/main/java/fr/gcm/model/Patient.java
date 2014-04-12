@@ -39,7 +39,7 @@ public class Patient implements Serializable
 	private Date 	birthDay;		// la date de naissance du patient
 	private String 	sex;			// le sex du patient
 	
-//	private Set<Appointment> appointments = new HashSet<Appointment>();   // liste des RDVs
+	private Set<Appointment> appointments = new HashSet<Appointment>();   // liste des RDVs
 //	private Set<Consultation> consultations = new HashSet<Consultation>(); // liste des consultations 
 	
 	/**
@@ -135,9 +135,9 @@ public class Patient implements Serializable
 	public String getSex() {return sex;}
 	public void setSex(String sex) {this.sex = sex;}
 
-//	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
-//	public Set<Appointment> getAppointments() {return appointments;}
-//	public void setAppointments(Set<Appointment> appointments) {this.appointments = appointments;}
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
+	public Set<Appointment> getAppointments() {return appointments;}
+	public void setAppointments(Set<Appointment> appointments) {this.appointments = appointments;}
 
 //	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
 //	public Set<Consultation> getConsultations() {return consultations;}
