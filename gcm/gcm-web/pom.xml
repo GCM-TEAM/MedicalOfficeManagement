@@ -1,7 +1,5 @@
 <?xml version="1.0"?>
-<project
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
-	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>gcm-web</artifactId>
 	<packaging>war</packaging>
@@ -10,7 +8,7 @@
 	<parent>
 		<groupId>fr.gcm</groupId>
 		<artifactId>gcm</artifactId>
-		<version>${globale.version}</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 	<properties>
 		<jsf.version>2.2.1</jsf.version>
@@ -90,6 +88,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>gcm-web</finalName>
+		<finalName>gcm</finalName>
 	</build>
 </project>

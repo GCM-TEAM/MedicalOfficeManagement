@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.gcm</groupId>
 	<artifactId>gcm</artifactId>
-	<version>${globale.version}</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -18,7 +18,7 @@
 		<logback.version>1.0.13</logback.version>
 		<slf4j.version>1.7.5</slf4j.version>
 		<compiler.version>2.3.2</compiler.version>
-		<globale.version>1.1.2-SNAPSHOT</globale.version>
+		<globale.version>1.0.0-SNAPSHOT</globale.version>
 	</properties>
 
 	<build>
@@ -110,20 +110,11 @@
 		</dependencies>
 	</dependencyManagement>
 	
-	<distributionManagement>
-		<repository>
-			<id>nexus</id>
-			<name>test</name>
-			<url>/Volumes/Macintosh HD/mounir/Billel</url>
-			<layout>default</layout>
-		</repository>
-	</distributionManagement>
-	
 	<scm>
 		<connection>scm:git:https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</connection>
 		<developerConnection>scm:git:https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</developerConnection>
 		<url>https://c7f422cb8cc320173649df3d023755dba78666ce@github.com:mloubari/GCM-TEAM/MedicalOfficeManagement.git</url>
-	  <tag>gcm-1.0.2</tag>
+	  <tag>gcm-1.0.1</tag>
   </scm>
 
 </project>
