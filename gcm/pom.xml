@@ -111,10 +111,10 @@
 	</dependencyManagement>
 
 	<distributionManagement>
-	<!-- 	<repository>
+	 	<repository>
 			<id>nexus-releases</id>
 			<url>http://localhost:8081/nexus-2.0/content/repositories/releases/</url>
-		</repository> -->
+		</repository>
 		<snapshotRepository>
 			<id>nexus-snapshots</id>
 			<url>http://localhost:8081/nexus-2.0/content/repositories/snapshots/</url>
