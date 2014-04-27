@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>gcm-web</artifactId>
 	<packaging>war</packaging>
@@ -24,8 +25,8 @@
 			<url>http://repository.primefaces.org</url>
 		</repository>
 	</repositories>
-	
-	
+
+
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -80,7 +81,7 @@
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>4.0.RC1</version>
-	</dependency>
+		</dependency>
 		<!-- LogBack dependency -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
