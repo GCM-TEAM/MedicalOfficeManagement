@@ -30,7 +30,7 @@ public class Profiles implements Serializable
 	private static final long serialVersionUID = 1L;
 	private Long 	profilesID; 			// identifiant profiles
 	private String  profile;				// profile des utilisateurs
-	private User user;						// utilisateur
+	private User user;						// clé etrangére utilisateur
 	
 	/**
 	 * Constructeur : cre une nouvelle instance de : Profiles

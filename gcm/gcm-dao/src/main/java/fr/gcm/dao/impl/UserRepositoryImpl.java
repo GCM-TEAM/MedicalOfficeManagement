@@ -108,6 +108,10 @@ public class UserRepositoryImpl implements IUserRepository {
 		return sessionFactory.getCurrentSession();
 	}
 
+	/**
+	 * 
+	 * @param sessionFactory
+	 */
 	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;

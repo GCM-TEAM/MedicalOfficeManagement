@@ -20,13 +20,14 @@
 									, fr.gcm.model.Medecines
 									, fr.gcm.model.Patient
 									, fr.gcm.model.Consultation
-									, fr.gcm.model.Appointment">
+									, fr.gcm.model.Appointment
+									,fr.gcm.model.Address">
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="org.hibernate.dialect.PostgreSQLDialect">false</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
 				<prop key="hibernate.default_schema">gcm</prop>				
 			</props>

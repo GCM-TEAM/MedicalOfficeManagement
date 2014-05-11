@@ -46,7 +46,7 @@ public class AppointmentRepositoryImplTest {
 	@Test
 	public void testUpdateAppointment() {
 		bnsObjAppointment.setEventID("61981e87-f508-4707-8a51-d51eef9dcae5");
-		assertTrue(appointmentRepository.updateAppointment(bnsObjAppointment));
+		assertTrue(appointmentRepository.updateAppointmentByEventID(bnsObjAppointment));
 	}
 
 	@Test

@@ -47,18 +47,23 @@ public class UserManagedBean implements Serializable {
 	 */
 	public void addUser() {
 		try {
+			
+			//Creer l'objet User
 			User user = new User();
 			user.setFirstName(firstName);
 			user.setLastName(lastName);
 			user.setLogin(login);
 			user.setPassword(password);
 
+			//Creer l'objet Profiles
 			Profiles profiles = new Profiles();
 			profiles.setProfile(profile);
-
+			
+			//Creer une jointure entre les deux tables USER et PROFILES
 			profiles.setUser(user);
 			user.getProfiles().add(profiles);
 
+			//Inserer les deux objets User et Profiles dans les deux tables correspondantes
 			userService.addUser(user);
 			profilesService.addProfile(profiles);
 

@@ -2,6 +2,7 @@ package fr.gcm.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,20 +32,15 @@ public class PatientService implements IPatientService {
 	 */
 	@Override
 	public void addPatient(Patient bnsObjpatient) {
-		if (bnsObjpatient != null) {
 			patientRepository.addPatient(bnsObjpatient);
-		}
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean updatePatient(Patient bnsObjPatient) {
-		if (bnsObjPatient != null) {
-			return patientRepository.updatePatient(bnsObjPatient);
-		}
-		return false;
+	public boolean updatePatientByEventID(Patient bnsObjPatient) {
+			return patientRepository.updatePatientByEventID(bnsObjPatient);
 	}
 
 	/**
@@ -54,18 +50,20 @@ public class PatientService implements IPatientService {
 	public List<Patient> findAllPatient() {
 		return patientRepository.findAllPatients();
 	}
-
+	
 	/**
-	 * @return the patientRepository
+	 * {@inheritDoc}
 	 */
-	public IPatientRepository getPatientRepository() {
-		return patientRepository;
+	@Override
+	public void deletePatientByEventID(String eventID) {
+		patientRepository.detetePatientByEventID(eventID);		
 	}
 
 	/**
 	 * @param patientRepository
 	 *            the patientRepository to set
 	 */
+	@Autowired
 	public void setPatientRepository(IPatientRepository patientRepository) {
 		this.patientRepository = patientRepository;
 	}

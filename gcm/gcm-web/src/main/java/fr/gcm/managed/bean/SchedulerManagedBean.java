@@ -19,8 +19,13 @@ import org.primefaces.model.DefaultScheduleEvent;
 import org.primefaces.model.DefaultScheduleModel;
 import org.primefaces.model.ScheduleEvent;
 import org.primefaces.model.ScheduleModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import fr.gcm.model.Address;
 import fr.gcm.model.Appointment;
+import fr.gcm.model.Patient;
+import fr.gcm.service.IAddressService;
 import fr.gcm.service.IAppointmentService;
 import fr.gcm.service.IPatientService;
 
@@ -39,27 +44,20 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(SchedulerManagedBean.class);
+
 	/**
-	 * Stock les evenmenet
+	 * Stocke les evenements
 	 */
 	private ScheduleModel eventModel;
-	
-	private String 	firstName;	 	// le pr�nom du patient
-	private String 	lastName;		// le nom du patient
-	private String 	maidenName;		// le nom de jeune fille
-	private String 	address;		// l'adresse du patient
-	private Long 	socialNumber;	// le numero de s�curit� sociale
-	private String 	phoneNumber;	// le numero de t�l�phone du patient
-	private Date 	birthDay;		// la date de naissance du patient
-	private String 	sex;			// le sex du patient
-
 
 	/**
 	 * Service appointment
 	 */
 	@ManagedProperty(value = "#{appointmentService}")
 	private IAppointmentService appointmentService;
-	
+
 	/**
 	 * Service patient
 	 */
@@ -67,9 +65,25 @@ public class SchedulerManagedBean implements Serializable {
 	private IPatientService patientService;
 
 	/**
+	 * Service address
+	 */
+	@ManagedProperty(value = "#{addressService}")
+	private IAddressService addressService;
+
+	/**
 	 * Evenement
 	 */
-	private ScheduleEvent event = new DefaultScheduleEvent();
+	private ScheduleEvent appointmentEvent = new DefaultScheduleEvent();
+
+	/**
+	 * Patient
+	 */
+	private Patient patient = new Patient();
+
+	/**
+	 * Adresse
+	 */
+	private Address address = new Address();
 
 	/**
 	 * Initialise les evenmenet stocker en base
@@ -92,7 +106,6 @@ public class SchedulerManagedBean implements Serializable {
 		}
 	}
 
-	
 	/**
 	 * Ajout des evenements dans le modele ainsi qu'un stockage en base
 	 * 
@@ -101,27 +114,94 @@ public class SchedulerManagedBean implements Serializable {
 	 */
 	public void addEvent(ActionEvent actionEvent) {
 
+		// Creer l'objet Appointment
 		Appointment bnsObjAppointment = new Appointment();
-	
 
-		if (event.getData() != null) {
-			bnsObjAppointment.setData(event.getData().toString());
+		if (appointmentEvent.getData() != null) {
+			bnsObjAppointment.setData(appointmentEvent.getData().toString());
 		}
 
-		bnsObjAppointment.setTitle(event.getTitle());
-		bnsObjAppointment.setStartDate(event.getStartDate());
-		bnsObjAppointment.setEndDate(event.getEndDate());
+		bnsObjAppointment.setTitle(appointmentEvent.getTitle());
+		bnsObjAppointment.setStartDate(appointmentEvent.getStartDate());
+		bnsObjAppointment.setEndDate(appointmentEvent.getEndDate());
 
-		if (event.getId() == null) {
-			eventModel.addEvent(event);
-			bnsObjAppointment.setEventID(event.getId());
+		LOGGER.debug("Objet metier Appointment" + bnsObjAppointment);
+
+		// Creer l'objet Patient
+		Patient bnsObjPatient = new Patient();
+		bnsObjPatient.setFirstName(patient.getFirstName());
+		bnsObjPatient.setLastName(patient.getLastName());
+		bnsObjPatient.setMaidenName(patient.getMaidenName());
+		bnsObjPatient.setSocialNumber(patient.getSocialNumber());
+		bnsObjPatient.setPhoneNumber(patient.getPhoneNumber());
+		bnsObjPatient.setBirthDay(patient.getBirthDay());
+		bnsObjPatient.setSex(patient.getSex());
+
+		LOGGER.debug("Objet metier Patient" + bnsObjPatient);
+
+		// Ceer adresse objet
+		Address bnsObjAddress = new Address();
+		bnsObjAddress.setNumber(address.getNumber());
+		bnsObjAddress.setStreet(address.getStreet());
+		bnsObjAddress.setZipCode(address.getZipCode());
+		bnsObjAddress.setCity(address.getCity());
+		bnsObjAddress.setCountry(address.getCountry());
+
+		// Creer une jointure entre les deux tables PATIENT et APPAOINTMENT
+		bnsObjAppointment.setPatient(bnsObjPatient);
+		bnsObjPatient.getAppointments().add(bnsObjAppointment);
+
+		// Creer une jointure entre les deux tables PATIENT et ADDRESS
+		bnsObjAddress.setPatient(bnsObjPatient);
+		bnsObjPatient.getAddresses().add(bnsObjAddress);
+
+		if (appointmentEvent.getId() == null) {
+			eventModel.addEvent(appointmentEvent);
+			bnsObjAppointment.setEventID(appointmentEvent.getId());
+			bnsObjPatient.setEventID(appointmentEvent.getId());
+			bnsObjAddress.setEventID(appointmentEvent.getId());
+
+			patientService.addPatient(bnsObjPatient);
 			appointmentService.addAppointment(bnsObjAppointment);
+			addressService.addAddress(bnsObjAddress);
 		} else {
-			bnsObjAppointment.setEventID(event.getId());
-			eventModel.updateEvent(event);
-			appointmentService.updateAppointment(bnsObjAppointment);
+			bnsObjAppointment.setEventID(appointmentEvent.getId());
+			bnsObjPatient.setEventID(appointmentEvent.getId());
+			bnsObjAddress.setEventID(appointmentEvent.getId());
+
+			eventModel.updateEvent(appointmentEvent);
+			appointmentService.updateAppointmentByEventID(bnsObjAppointment);
+			patientService.updatePatientByEventID(bnsObjPatient);
+			addressService.updateAddressByEventID(bnsObjAddress);
 		}
-		event = new DefaultScheduleEvent();
+		appointmentEvent = new DefaultScheduleEvent();
+		patient = new Patient();
+		address = new Address();
+	}
+
+	/**
+	 * Supprimer le RDV
+	 * 
+	 * @param actionEvent
+	 * 
+	 *            action event
+	 * 
+	 */
+	public void deleteAppointment(ActionEvent actionEvent) {
+		eventModel.deleteEvent(appointmentEvent);
+		appointmentService
+				.deleteAppointementByEventID(appointmentEvent.getId());
+		addressService.deleteAddressByEventID(appointmentEvent.getId());
+		patientService.deletePatientByEventID(appointmentEvent.getId());
+	}
+
+	/**
+	 * Retourne toutes les adresses
+	 * 
+	 * @return liste d'adresse
+	 */
+	public List<Address> findAllAddresses() {
+		return addressService.findAllAddresses();
 	}
 
 	/**
@@ -129,12 +209,12 @@ public class SchedulerManagedBean implements Serializable {
 	 * @param selectEvent
 	 */
 	public void onEventSelect(SelectEvent selectEvent) {
-		event = (ScheduleEvent) selectEvent.getObject();
+		appointmentEvent = (ScheduleEvent) selectEvent.getObject();
 	}
 
 	public void onDateSelect(SelectEvent selectEvent) {
-		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(),
-				(Date) selectEvent.getObject());
+		appointmentEvent = new DefaultScheduleEvent("",
+				(Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 	}
 
 	public void onEventMove(ScheduleEntryMoveEvent event) {
@@ -157,8 +237,8 @@ public class SchedulerManagedBean implements Serializable {
 		bnsObjAppointment.setTitle(event.getScheduleEvent().getTitle());
 		bnsObjAppointment.setStartDate(event.getScheduleEvent().getStartDate());
 		bnsObjAppointment.setEndDate(event.getScheduleEvent().getEndDate());
-		
-		appointmentService.updateAppointment(bnsObjAppointment);
+
+		appointmentService.updateAppointmentByEventID(bnsObjAppointment);
 
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Event resized", "Day delta:" + event.getDayDelta()
@@ -171,19 +251,9 @@ public class SchedulerManagedBean implements Serializable {
 		FacesContext.getCurrentInstance().addMessage(null, message);
 	}
 
-	
-
 	/*
 	 * Getters setters
 	 */
-	public ScheduleEvent getEvent() {
-		return event;
-	}
-
-	public void setEvent(ScheduleEvent event) {
-		this.event = event;
-	}
-
 	/**
 	 * @return the appointmentService
 	 */
@@ -215,118 +285,6 @@ public class SchedulerManagedBean implements Serializable {
 	}
 
 	/**
-	 * @return the firstName
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
-
-	/**
-	 * @param firstName the firstName to set
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	/**
-	 * @return the lastName
-	 */
-	public String getLastName() {
-		return lastName;
-	}
-
-	/**
-	 * @param lastName the lastName to set
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the maidenName
-	 */
-	public String getMaidenName() {
-		return maidenName;
-	}
-
-	/**
-	 * @param maidenName the maidenName to set
-	 */
-	public void setMaidenName(String maidenName) {
-		this.maidenName = maidenName;
-	}
-
-	/**
-	 * @return the address
-	 */
-	public String getAddress() {
-		return address;
-	}
-
-	/**
-	 * @param address the address to set
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	/**
-	 * @return the socialNumber
-	 */
-	public Long getSocialNumber() {
-		return socialNumber;
-	}
-
-	/**
-	 * @param socialNumber the socialNumber to set
-	 */
-	public void setSocialNumber(Long socialNumber) {
-		this.socialNumber = socialNumber;
-	}
-
-	/**
-	 * @return the phoneNumber
-	 */
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	/**
-	 * @param phoneNumber the phoneNumber to set
-	 */
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	/**
-	 * @return the birthDay
-	 */
-	public Date getBirthDay() {
-		return birthDay;
-	}
-
-	/**
-	 * @param birthDay the birthDay to set
-	 */
-	public void setBirthDay(Date birthDay) {
-		this.birthDay = birthDay;
-	}
-
-	/**
-	 * @return the sex
-	 */
-	public String getSex() {
-		return sex;
-	}
-
-	/**
-	 * @param sex the sex to set
-	 */
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	/**
 	 * @return the patientService
 	 */
 	public IPatientService getPatientService() {
@@ -334,9 +292,70 @@ public class SchedulerManagedBean implements Serializable {
 	}
 
 	/**
-	 * @param patientService the patientService to set
+	 * @param patientService
+	 *            the patientService to set
 	 */
 	public void setPatientService(IPatientService patientService) {
 		this.patientService = patientService;
+	}
+
+	/**
+	 * @return the patient
+	 */
+	public Patient getPatient() {
+		return patient;
+	}
+
+	/**
+	 * @param patient
+	 *            the patient to set
+	 */
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	/**
+	 * @return the address
+	 */
+	public Address getAddress() {
+		return address;
+	}
+
+	/**
+	 * @param address
+	 *            the address to set
+	 */
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	/**
+	 * @return the addressService
+	 */
+	public IAddressService getAddressService() {
+		return addressService;
+	}
+
+	/**
+	 * @param addressService
+	 *            the addressService to set
+	 */
+	public void setAddressService(IAddressService addressService) {
+		this.addressService = addressService;
+	}
+
+	/**
+	 * @return the appointmentEvent
+	 */
+	public ScheduleEvent getAppointmentEvent() {
+		return appointmentEvent;
+	}
+
+	/**
+	 * @param appointmentEvent
+	 *            the appointmentEvent to set
+	 */
+	public void setAppointmentEvent(ScheduleEvent appointmentEvent) {
+		this.appointmentEvent = appointmentEvent;
 	}
 }

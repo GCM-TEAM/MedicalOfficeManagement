@@ -29,7 +29,7 @@ public interface IAppointmentRepsitory {
 	 * 
 	 *            retrun boolean
 	 */
-	boolean updateAppointment(Appointment bnsObjAppointment);
+	boolean updateAppointmentByEventID(Appointment bnsObjAppointment);
 
 	/**
 	 * Retoune une liste de RDV
@@ -37,4 +37,11 @@ public interface IAppointmentRepsitory {
 	 * @return liste des rendez-vous
 	 */
 	List<Appointment> findAllApointments();
+	
+	/**
+	 * Supprimer le RDV avec l'id de l'evenement
+	 * @param eventID
+	 * 			id de l'evenement
+	 */
+	void deteteAppointmentByEventID(String eventID);
 }

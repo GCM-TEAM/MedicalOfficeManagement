@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.gcm.dao.IAppointmentRepsitory;
+import fr.gcm.model.Address;
 import fr.gcm.model.Appointment;
 
 /**
@@ -54,19 +55,19 @@ public class AppointmentRepositoryImpl implements IAppointmentRepsitory {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean updateAppointment(Appointment bnsObjAppointment) {
+	public boolean updateAppointmentByEventID(Appointment bnsObjAppointment) {
 		Query appointmentQuery = null;
 
 		try {
 
 			appointmentQuery = getSessionFactory()
 					.createQuery(
-							"update Appointment set Title = :Title , data = :data, startDate = :startDate, endDate = :endDate where eventID = :eventID");
+							"update Appointment set title = :title , data = :data, startDate = :startDate, endDate = :endDate where eventID = :eventID");
 
 			appointmentQuery.setParameter("eventID",
 					bnsObjAppointment.getEventID());
 			appointmentQuery
-					.setParameter("Title", bnsObjAppointment.getTitle());
+					.setParameter("title", bnsObjAppointment.getTitle());
 			appointmentQuery.setParameter("data", bnsObjAppointment.getData());
 			appointmentQuery.setParameter("startDate",
 					bnsObjAppointment.getStartDate());
@@ -105,6 +106,28 @@ public class AppointmentRepositoryImpl implements IAppointmentRepsitory {
 		}
 
 		return appointmentQuery.list();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void deteteAppointmentByEventID(String eventID) {
+		Query appointmentQuery = null;
+
+		try {
+
+			appointmentQuery = getSessionFactory().createQuery(
+					"from Appointment where eventID = :eventID");
+			appointmentQuery.setParameter("eventID", eventID);
+			Appointment appointment = (Appointment) appointmentQuery.list().get(0);
+			getSessionFactory().delete(appointment);
+
+			LOGGER.info("RDV supprimée avec succes");
+
+		} catch (DataAccessException e) {
+			LOGGER.error("Erreur lors de la supprission du RDV", e);
+		}		
 	}
 
 	/*

@@ -18,13 +18,13 @@
 	</properties>
 
 	<!-- primefaces repo -->
-	<repositories>
+	 <repositories>
 		<repository>
 			<id>prime-repo</id>
 			<name>Prime Repo</name>
 			<url>http://repository.primefaces.org</url>
 		</repository>
-	</repositories>
+	</repositories> 
 
 
 	<dependencies>
@@ -82,13 +82,15 @@
 			<artifactId>primefaces</artifactId>
 			<version>4.0.RC1</version>
 		</dependency>
+
+
 		<!-- LogBack dependency -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 	</dependencies>
-	<build>
-		<finalName>gcm</finalName>
-	</build>
+	 <build>
+		<finalName>gcm-web</finalName>
+	</build> 
 </project>

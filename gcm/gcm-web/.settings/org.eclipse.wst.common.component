@@ -12,6 +12,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/gcm-web/target/classes"/>
-        <property name="context-root" value="gcm"/>
+        <property name="context-root" value="gcm-web"/>
     </wb-module>
 </project-modules>

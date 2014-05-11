@@ -30,9 +30,7 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public void addUser(User user) {
-		if (user != null) {
-			userRepository.addUser(user);
-		}
+		userRepository.addUser(user);
 	}
 
 	/**

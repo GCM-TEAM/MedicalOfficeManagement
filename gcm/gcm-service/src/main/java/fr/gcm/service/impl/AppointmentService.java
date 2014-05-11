@@ -26,33 +26,37 @@ public class AppointmentService implements IAppointmentService {
 	 */
 	private IAppointmentRepsitory appointmentRepository;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void addAppointment(Appointment bnsObjAppointment) {
-
-		if (bnsObjAppointment != null) {
-			appointmentRepository.addAppointment(bnsObjAppointment);
-		}
+		appointmentRepository.addAppointment(bnsObjAppointment);
 	}
-
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean updateAppointment(Appointment bnsObjAppointment) {
-
-		if (bnsObjAppointment != null) {
-			return appointmentRepository.updateAppointment(bnsObjAppointment);
-		}
-		return false;
+	public boolean updateAppointmentByEventID(Appointment bnsObjAppointment) {
+		return appointmentRepository
+				.updateAppointmentByEventID(bnsObjAppointment);
 	}
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public List<Appointment> findAllApointments() {
 		return appointmentRepository.findAllApointments();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void deleteAppointementByEventID(String eventID) {
+		appointmentRepository.deteteAppointmentByEventID(eventID);
 	}
 
 	/*
@@ -66,6 +70,5 @@ public class AppointmentService implements IAppointmentService {
 	public void setAppointmentRepository(
 			IAppointmentRepsitory appointmentRepository) {
 		this.appointmentRepository = appointmentRepository;
-	}
-
+ 	}
 }

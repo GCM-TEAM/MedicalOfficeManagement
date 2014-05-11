@@ -22,13 +22,13 @@ public interface IPatientRepository {
 	void addPatient(Patient bnsObjpatient);
 
 	/**
-	 * Mise à jour d'un patient
+	 * Mise à jour d'un patient avec l'id de l'evenement
 	 * 
 	 * @param bnsObjPatient
 	 *            objet metier patient
 	 * @return boolean
 	 */
-	boolean updatePatient(Patient bnsObjPatient);
+	boolean updatePatientByEventID(Patient bnsObjPatient);
 
 	/**
 	 * Retourne l'ensemble des patients
@@ -36,5 +36,13 @@ public interface IPatientRepository {
 	 * @return liste des patients
 	 */
 	List<Patient> findAllPatients();
+
+	/**
+	 * Supprission du patient avec l'id de l'evenement
+	 * 
+	 * @param eventID
+	 *            id de l'evenement
+	 */
+	void detetePatientByEventID(String eventID);
 
 }

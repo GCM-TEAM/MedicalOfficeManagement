@@ -33,7 +33,7 @@ public class Appointment implements Serializable {
 	private Date startDate; // date de début de RDV
 	private String data; // commentaire
 	private Date endDate; // date de fin de RDV
-	private String Title; // titre
+	private String title; // titre
 	private Patient patient; // patient
 
 	// private Consultation consultation; // consultation
@@ -72,10 +72,12 @@ public class Appointment implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer("[");
-		sb.append("appointmentDate = " + startDate);
+		StringBuffer sb = new StringBuffer();
+		sb.append("[startDate = " + startDate);
 		sb.append(", comment = " + data);
-		sb.append("]");
+		sb.append(", endDate = " + endDate);
+		sb.append(", title = " + title);
+		sb.append(", patient = " + patient + "]");
 		return sb.toString();
 	}
 
@@ -152,7 +154,7 @@ public class Appointment implements Serializable {
 	 */
 	@Column(name = "TITLE")
 	public String getTitle() {
-		return Title;
+		return title;
 	}
 
 	/**
@@ -160,7 +162,7 @@ public class Appointment implements Serializable {
 	 *            the title to set
 	 */
 	public void setTitle(String title) {
-		Title = title;
+		this.title = title;
 	}
 
 	/**

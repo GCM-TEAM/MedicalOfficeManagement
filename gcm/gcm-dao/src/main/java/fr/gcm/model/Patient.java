@@ -29,18 +29,18 @@ public class Patient implements Serializable
 	private static final long serialVersionUID = 1L;
 
 	private Long 	patientID;    	// identifiant du patient
+	private String eventID; // identifiant de l'evenenment de la calendrier
 	private String 	firstName;	 	// le pr�nom du patient
 	private String 	lastName;		// le nom du patient
 	private String 	maidenName;		// le nom de jeune fille
-	private Integer age;			// l'age du patient
-	private String 	address;		// l'adresse du patient
 	private Long 	socialNumber;	// le numero de s�curit� sociale
 	private String 	phoneNumber;	// le numero de t�l�phone du patient
 	private Date 	birthDay;		// la date de naissance du patient
 	private String 	sex;			// le sex du patient
 	
 	private Set<Appointment> appointments = new HashSet<Appointment>();   // liste des RDVs
-//	private Set<Consultation> consultations = new HashSet<Consultation>(); // liste des consultations 
+//	private Set<Consultation> consultations = new HashSet<Consultation>(); // liste des consultations
+	private Set<Address> addresses = new HashSet<Address>();
 	
 	/**
 	 * Constructeur : cr�e une nouvelle instance de : Patient
@@ -74,17 +74,13 @@ public class Patient implements Serializable
 	public String toString()
 	{
 		StringBuffer sb = new StringBuffer();
-		sb.append("[");
-		sb.append("firstName = " + firstName);
+		sb.append("[firstName = " + firstName);
 		sb.append(", lastName = " + lastName);
 		sb.append(", maidenName = " + maidenName);
-		sb.append(", age = " + age);
-		sb.append(", address = " + address);
 		sb.append(", socialNumber = " + socialNumber);
 		sb.append(", phoneNumber = " + phoneNumber);
 		sb.append(", birthDay = " + birthDay);
-		sb.append(", sex = " + sex);
-		sb.append("]");
+		sb.append(", sex = " + sex + "]");
 		
 		return sb.toString();
 	}
@@ -111,14 +107,6 @@ public class Patient implements Serializable
 	public String getMaidenName() {return maidenName;}
 	public void setMaidenName(String maidenName) {this.maidenName = maidenName;}
 	
-	@Column(name = "AGE")
-	public Integer getAge() {return age;}
-	public void setAge(Integer age) {this.age = age;}
-	
-	@Column(name = "ADDRESS")
-	public String getAddress() {return address;}
-	public void setAddress(String address) {this.address = address;}
-	
 	@Column(name = "SOCIALNUMBER")
 	public Long getSocialNumber() {return socialNumber;}
 	public void setSocialNumber(Long socialNumber) {this.socialNumber = socialNumber;}
@@ -138,6 +126,32 @@ public class Patient implements Serializable
 	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
 	public Set<Appointment> getAppointments() {return appointments;}
 	public void setAppointments(Set<Appointment> appointments) {this.appointments = appointments;}
+
+	/**
+	 * @return the addresses
+	 */
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
+	public Set<Address> getAddresses() {return addresses;}
+
+	/**
+	 * @param addresses the addresses to set
+	 */
+	public void setAddresses(Set<Address> addresses) {this.addresses = addresses;}
+
+	/**
+	 * @return the eventID
+	 */
+	@Column(name = "EVENTID", unique = true)
+	public String getEventID() {
+		return eventID;
+	}
+
+	/**
+	 * @param eventID the eventID to set
+	 */
+	public void setEventID(String eventID) {
+		this.eventID = eventID;
+	}
 
 //	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
 //	public Set<Consultation> getConsultations() {return consultations;}

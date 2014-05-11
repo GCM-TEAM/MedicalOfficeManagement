@@ -38,50 +38,90 @@
 			<p:panel header="Rendez-Vous">
 				<h:panelGrid id="eventDetails" columns="2">
 					<h:outputLabel for="title" value="Titre:" />
-					<p:inputText id="title" value="#{scheduleMB.event.title}"
-						required="true" />
+					<p:inputText id="title"
+						value="#{scheduleMB.appointmentEvent.title}" required="true" />
 
 					<h:outputLabel for="from" value="Du:" />
-					<p:inputMask id="from" value="#{scheduleMB.event.startDate}"
+					<p:inputMask id="from"
+						value="#{scheduleMB.appointmentEvent.startDate}"
 						mask="99/99/9999 99:99">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 					</p:inputMask>
 
 
 					<h:outputLabel for="to" value="Au:" />
-					<p:inputMask id="to" value="#{scheduleMB.event.endDate}"
+					<p:inputMask id="to" value="#{scheduleMB.appointmentEvent.endDate}"
 						mask="99/99/9999 99:99">
 						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" />
 					</p:inputMask>
 
 					<h:outputLabel for="allDay" value="Toute la journée:" />
 					<h:selectBooleanCheckbox id="allDay"
-						value="#{scheduleMB.event.allDay}" />
+						value="#{scheduleMB.appointmentEvent.allDay}" />
 				</h:panelGrid>
 			</p:panel>
 
 
-			<p:panel header="Patient Info">
+			<p:panel header="Patient Informations">
 
-				<h:panelGrid id="patientInfo" columns="2">
+				<h:panelGrid id="patientInfo" columns="4">
 
 					<h:outputLabel for="firstName" value="Prénom: *" />
-					<p:inputText id="firstName" value="#{scheduleMB.firstName}" />
-					<h:outputLabel for="lasttName" value="Nom: *" />
-					<p:inputText id="lasttName" value="#{scheduleMB.lastName}" />
-					<h:outputLabel for="maidenName" value="Nom de jeune fille: *" />
-					<p:inputText id="maidenName" value="#{scheduleMB.maidenName}" />
-					<h:outputLabel for="address" value="Adresse: *" />
-					<p:inputText id="address" value="#{scheduleMB.address}" />
+					<p:inputText id="firstName" value="#{scheduleMB.patient.firstName}" />
+
+					<h:outputLabel for="number" value="Numero *" />
+					<p:inputText id="numbrt" value="#{scheduleMB.address.number}" />
+
+					<h:outputLabel for="lastName" value="Nom: *" />
+					<p:inputText id="lastName" value="#{scheduleMB.patient.lastName}" />
+
+					<h:outputLabel for="street" value="Rue *" />
+					<p:inputText id="street" value="#{scheduleMB.address.street}" />
+
+					<h:outputLabel for="maidenName" value="Nom de jeune fille: " />
+					<p:inputText id="maidenName"
+						value="#{scheduleMB.patient.maidenName}" />
+
+					<h:outputLabel for="zipCode" value="Code postal: *" />
+					<p:selectOneMenu value="#{scheduleMB.address.zipCode}">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Option 1" itemValue="1" />
+						<f:selectItem itemLabel="Option 2" itemValue="2" />
+						<f:selectItem itemLabel="Option 3" itemValue="3" />
+					</p:selectOneMenu>
+
 					<h:outputLabel for="socielNumber"
 						value="Numero de securité sociale: *" />
-					<p:inputText id="socielNumber" value="#{scheduleMB.socialNumber}" />
+					<p:inputText id="socielNumber"
+						value="#{scheduleMB.patient.socialNumber}" />
+
+					<h:outputLabel for="city" value="Ville: *" />
+					<p:selectOneMenu value="#{scheduleMB.address.city}">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItem itemLabel="Option 1" itemValue="1" />
+						<f:selectItem itemLabel="Option 2" itemValue="2" />
+						<f:selectItem itemLabel="Option 3" itemValue="3" />
+					</p:selectOneMenu>
+
 					<h:outputLabel for="phoneNumber" value="Numero de téléphone: *" />
-					<p:inputText id="phoneNumber" value="#{scheduleMB.phoneNumber}" />
+					<p:inputMask id="phoneNumber"
+						value="#{scheduleMB.patient.phoneNumber}"
+						mask="(9999) 99-99-99-99-99" />
+
+					<h:outputLabel for="country" value="Pays: *" />
+					<p:selectOneMenu value="#{scheduleMB.address.country}">
+						<f:selectItem itemLabel="Select One" itemValue="" />
+						<f:selectItems value="#{scheduleMB.findAllAddresses}" var="address" itemLabel="#{address.country}" itemValue="#{address.addressID}"/>
+					</p:selectOneMenu>
+
 					<h:outputLabel for="birthDay" value="Date de naissance: *" />
-					<p:inputText id="birthDay" value="#{scheduleMB.birthDay}" />
+					<p:inputMask id="birthDay" value="#{scheduleMB.patient.birthDay}"
+						mask="99/99/9999">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</p:inputMask>
+
 					<h:outputLabel for="sex" value="Sex: *" />
-					<p:inputText id="sex" value="#{scheduleMB.sex}" />
+					<p:inputText id="sex" value="#{scheduleMB.patient.sex}" />
 
 				</h:panelGrid>
 
@@ -90,6 +130,9 @@
 			<p:commandButton type="reset" value="Effacer" />
 			<p:commandButton id="addButton" value="Sauvegarder"
 				actionListener="#{scheduleMB.addEvent}"
+				oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
+			<p:commandButton id="deleteButton" value="Supprimer"
+				actionListener="#{scheduleMB.deleteAppointment}"
 				oncomplete="PF('myschedule').update();PF('eventDialog').hide();" />
 		</p:dialog>
 

@@ -7,11 +7,13 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import fr.gcm.dao.IPatientRepository;
+import fr.gcm.model.Appointment;
 import fr.gcm.model.Patient;
 
 /**
@@ -51,7 +53,7 @@ public class PatientRepositoryImpl implements IPatientRepository {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean updatePatient(Patient bnsObjPatient) {
+	public boolean updatePatientByEventID(Patient bnsObjPatient) {
 
 		Query patientQuery = null;
 
@@ -59,15 +61,13 @@ public class PatientRepositoryImpl implements IPatientRepository {
 
 			patientQuery = getSessionFactory()
 					.createQuery(
-							"update Patient set firstName = :firstName , lastName = :lastName, maidenName = :maidenName, age = :age, address = :address, socialNumber = :socialNumber, phoneNumber = :phoneNumber, birthDay = :birthDay, sex = :sex  where patientID = :patientID");
+							"update Patient set firstName = :firstName , lastName = :lastName, maidenName = :maidenName, age = :age, socialNumber = :socialNumber, phoneNumber = :phoneNumber, birthDay = :birthDay, sex = :sex  where eventID = :eventID");
 
 			patientQuery
 					.setParameter("firstName", bnsObjPatient.getFirstName());
 			patientQuery.setParameter("lastName", bnsObjPatient.getLastName());
 			patientQuery.setParameter("maidenName",
 					bnsObjPatient.getMaidenName());
-			patientQuery.setParameter("age", bnsObjPatient.getAge());
-			patientQuery.setParameter("address", bnsObjPatient.getAddress());
 			patientQuery.setParameter("socialNumber",
 					bnsObjPatient.getSocialNumber());
 			patientQuery.setParameter("phoneNumber",
@@ -99,6 +99,7 @@ public class PatientRepositoryImpl implements IPatientRepository {
 		try {
 
 			patientQuery = getSessionFactory().createQuery("from Patient");
+			LOGGER.info("Patients extraits avec succes");
 
 		} catch (DataAccessException e) {
 			LOGGER.error("Erreur lors de l'extraction des Patients", e);
@@ -106,6 +107,29 @@ public class PatientRepositoryImpl implements IPatientRepository {
 
 		return patientQuery.list();
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void detetePatientByEventID(String eventID) {
+		Query patientQuery = null;
+
+		try {
+
+			patientQuery = getSessionFactory().createQuery(
+					"from Patient where eventID = :eventID");
+			patientQuery.setParameter("eventID", eventID);
+			Patient patient = (Patient) patientQuery.list().get(0);
+			getSessionFactory().delete(patient);
+
+			LOGGER.info("Patient supprimée avec succes");
+
+		} catch (DataAccessException e) {
+			LOGGER.error("Erreur lors de la supprission du patient", e);
+		}		
+	}
+
 
 	/**
 	 * @return the sessionFactory
@@ -118,6 +142,7 @@ public class PatientRepositoryImpl implements IPatientRepository {
 	 * @param sessionFactory
 	 *            the sessionFactory to set
 	 */
+	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}

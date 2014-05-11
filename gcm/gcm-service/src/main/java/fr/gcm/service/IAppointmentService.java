@@ -20,22 +20,28 @@ public interface IAppointmentService {
 	 *            RDV metier
 	 */
 	void addAppointment(Appointment bnsObjAppointment);
-	
+
 	/**
-	 * Service mise à jour des RDV
+	 * Service mise à jour des RDV avec id evenement
 	 * 
 	 * @param bnsObjAppointment
 	 *            RDV
-	 *            
-	 * retrun boolean
+	 * 
+	 *            retrun boolean
 	 */
-	boolean updateAppointment(Appointment bnsObjAppointment);
-	
-	
+	boolean updateAppointmentByEventID(Appointment bnsObjAppointment);
+
 	/**
 	 * Service retoune l'ensemble des RDV
 	 * 
 	 * @return liste des RDV
 	 */
 	List<Appointment> findAllApointments();
+	
+	/**
+	 * Service de supprission des RDV
+	 * @param eventID
+	 * 			id evenment
+	 */
+	void deleteAppointementByEventID(String eventID);
 }

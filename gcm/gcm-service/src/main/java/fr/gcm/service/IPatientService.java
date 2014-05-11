@@ -9,26 +9,26 @@ import fr.gcm.model.Patient;
  * 
  * @author ML11181N
  * 
- *         Interface définit l'ensemble de traitements sur user dans la couche
+ *         Interface définit l'ensemble de traitements sur le patient dans la couche
  *         service.
  */
 public interface IPatientService {
 	/**
 	 * Service ajout patient
 	 * 
-	 * @param bnsObjpatient
+	 * @param bnsObjPatient
 	 *            objet metier patient
 	 */
-	void addPatient(Patient bnsObjpatient);
+	void addPatient(Patient bnsObjPatient);
 
 	/**
-	 * Service mise à jour des patients
+	 * Service mise à jour des patients avec id l'evenement
 	 * 
 	 * @param bnsObjPatient
 	 *            objet metier patient
 	 * @return boolean
 	 */
-	boolean updatePatient(Patient bnsObjPatient);
+	boolean updatePatientByEventID(Patient bnsObjPatient);
 
 	/**
 	 * Service retourne l'ensemble des patients
@@ -36,7 +36,11 @@ public interface IPatientService {
 	 * @return liste des patients
 	 */
 	List<Patient> findAllPatient();
-
 	
-
+	/**
+	 * Service de supprission des patients
+	 * @param eventID
+	 * 				id evenement
+	 */
+	void deletePatientByEventID(String eventID);
 }
