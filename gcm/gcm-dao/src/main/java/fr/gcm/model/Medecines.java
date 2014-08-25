@@ -28,7 +28,7 @@ public class Medecines implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Long 	MedecinesID; 			//identifiant du mdicament
+	private Integer medecinesID; 			//identifiant du mdicament
 	private String 	name;  					// le nom du mdicaments
 	private Integer quantity;				// la quantit prescrite
 	private Integer use;  					// le nombre d'utilisation
@@ -83,8 +83,8 @@ public class Medecines implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "MEDECINES_ID_SEQ")
 	@Column(name = "MEDECINESID" , unique = true , nullable = false)
-	public Long getMedecinesID() {return MedecinesID;}
-	public void setMedecinesID(Long medecinesID) {MedecinesID = medecinesID;}
+	public Integer getMedecinesID() {return medecinesID;}
+	public void setMedecinesID(Integer medecinesID) {this.medecinesID = medecinesID;}
 	
 	@Column(name = "NAME")
 	public String getName() {return name;}
@@ -99,7 +99,7 @@ public class Medecines implements Serializable {
 	public void setUse(Integer use) {this.use = use;}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="PRESCRIPTIONID", nullable=false)
+	@JoinColumn(name="PRESCRIPTIONID")
 	public Prescription getPrescription() {return prescription;}
 	public void setPrescription(Prescription prescription) {this.prescription = prescription;}
 }

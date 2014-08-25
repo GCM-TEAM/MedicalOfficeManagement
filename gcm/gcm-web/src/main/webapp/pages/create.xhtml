@@ -10,12 +10,13 @@
 </h:head>
 
 <h:body>
-	
+
+
 	<p:panel id="panel" header="New User" style="margin-bottom:10px;">
 
 		<h:form id="form">
-			<p:growl id = "messagesCreate"  showDetail="true" life="3000"/> 
-			
+			<p:growl id="messagesCreate" showDetail="true" life="3000" />
+
 			<h:panelGrid columns="1">
 				<h:outputLabel for="firstName" value="Firstname: *" />
 				<p:inputText id="firstName" value="#{userMB.firstName}"
@@ -44,7 +45,7 @@
 					<f:validateLength minimum="3" />
 				</p:inputText>
 				<p:messages for="password" />
-				
+
 				<h:outputLabel for="profile" value="Profile *" />
 				<p:inputText id="profile" value="#{userMB.profile}" required="true"
 					label="Profile">
@@ -52,9 +53,9 @@
 				</p:inputText>
 				<p:messages for="profile" />
 			</h:panelGrid>
-			
-			<p:commandButton value="Add User" update="messagesCreate" id="addUser"
-			actionListener="#{userMB.addUser}" title="Add user" />
+
+			<p:commandButton value="Add User" update="messagesCreate"
+				id="addUser" actionListener="#{userMB.addUser}" title="Add"/>
 
 		</h:form>
 	</p:panel>

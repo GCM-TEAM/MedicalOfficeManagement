@@ -20,7 +20,7 @@ import fr.gcm.service.IPatientService;
 
 @Service("patientService")
 @Transactional
-public class PatientService implements IPatientService {
+public class PatientServiceimpl implements IPatientService {
 
 	/**
 	 * Service patient repository

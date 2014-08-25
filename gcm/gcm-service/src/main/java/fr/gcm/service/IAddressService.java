@@ -39,10 +39,9 @@ public interface IAddressService {
 	List<Address> findAllAddresses();
 	
 	/**
-	 * Service de supprission des adresses
+	 * Service de suppression des adresses
 	 * @param eventID
 	 * 			id evenement
 	 */
 	void deleteAddressByEventID(String eventID);
-
 }

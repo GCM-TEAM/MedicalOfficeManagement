@@ -38,7 +38,7 @@ public interface IPatientRepository {
 	List<Patient> findAllPatients();
 
 	/**
-	 * Supprission du patient avec l'id de l'evenement
+	 * Suppression du patient avec l'id de l'evenement
 	 * 
 	 * @param eventID
 	 *            id de l'evenement

@@ -39,7 +39,7 @@ public interface IAppointmentService {
 	List<Appointment> findAllApointments();
 	
 	/**
-	 * Service de supprission des RDV
+	 * Service de suppression des RDV
 	 * @param eventID
 	 * 			id evenment
 	 */

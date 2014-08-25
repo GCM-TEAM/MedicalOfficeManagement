@@ -6,29 +6,50 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 
-<h:head>
-	<link type="text/css" rel="stylesheet" href="themes/bluesky/skin.css" />
-</h:head>
+
+<f:view contentType="text/html">
+	<h:head>
+		<link href="../css/login.css" rel="stylesheet" type="text/css" />
+		<title><ui:insert name="title">Login</ui:insert></title>
+	</h:head>
 
 
-<body>
-	<p:panel header="Authentication">
-		<h:form id="form">
-			<p:growl id="messagesLogin" showDetail="true" life="3000" />
-			<h:panelGrid cellpadding="2" columns="2">
-				<h:outputLabel for="username" value="Username:" />
-				<p:inputText id="username" value="#{loginMB.username}"
-					label="Username">
-				</p:inputText>
-				<h:outputLabel for="password" value="Password:" />
-				<h:inputSecret id="password" value="#{loginMB.password}"
-					label="Password">
-				</h:inputSecret>
-				<p:commandButton value="Login" action="#{loginMB.login}"
-					ajax="false" />
-			</h:panelGrid>
-		</h:form>
-	</p:panel>
-</body>
+	<body>
+
+		<div class="container">
+
+			<h:form id="loginForm">
+				<p:fieldset legend="Authentification">
+
+					<p:growl id="messagesLogin" showDetail="true" life="3000" />
+
+					<h:panelGrid columns="3" cellspacing="8" id="logPanelGrid">
+
+						<h:panelGroup>
+							<h:outputText value="Nom utilisateur" />
+							<h:outputText style="color:red" value="* " />
+						</h:panelGroup>
+						<p:inputText id="userName" value="#{loginMB.username}"
+							label="Nom utilisateur" title="Entrez votre nom d'utilisateur" />
+						<p:tooltip for="userName" styleClass="tooltipe" showEvent="focus"
+							hideEvent="blur" />
+
+						<h:panelGroup>
+							<h:outputText value="mot de passe" />
+							<h:outputText style="color:red" value="* " />
+						</h:panelGroup>
+						<p:inputText id="password" value="#{loginMB.password}"
+							label="Mot de passe" title="Entrez votre mot de passe" />
+						<p:tooltip for="password" styleClass="tooltipe" showEvent="focus"
+							hideEvent="blur" />
+
+						<p:commandButton value="Connexion" action="#{loginMB.login}"
+							icon="ui-icon-check" ajax="false" />
+					</h:panelGrid>
+				</p:fieldset>
+			</h:form>
+		</div>
+	</body>
+</f:view>
 </html>
 

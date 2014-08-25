@@ -40,7 +40,7 @@ public class AddressRepositoryImpl implements IAddressRepository {
 	 */
 	@Override
 	public void addAddress(Address address) {
-		try {
+		  try {
 			getSessionFactory().saveOrUpdate(address);
 			LOGGER.info("adresse inseré avec succes");
 		} catch (DataAccessException e) {

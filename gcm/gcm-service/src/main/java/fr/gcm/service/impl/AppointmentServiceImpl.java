@@ -19,7 +19,7 @@ import fr.gcm.service.IAppointmentService;
  */
 @Service("appointmentService")
 @Transactional
-public class AppointmentService implements IAppointmentService {
+public class AppointmentServiceImpl implements IAppointmentService {
 
 	/**
 	 * Service appointment repository

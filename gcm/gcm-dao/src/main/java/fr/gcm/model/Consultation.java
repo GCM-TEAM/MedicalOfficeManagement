@@ -11,6 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -36,6 +38,7 @@ public class Consultation implements Serializable {
 	private String resume; 					// le resum� d'une consultation
 	private String details; 				// le d�tail d'une consultation
 	private Set<Prescription> prescription = new HashSet<Prescription>();		// liste d'ordonnance
+	private Patient patient;				// clé étrangere partient
 
 	/**
 	 * Constructeur : cr�e une nouvelle instance de : Patient
@@ -109,5 +112,10 @@ public class Consultation implements Serializable {
 	@OneToMany( fetch = FetchType.LAZY , mappedBy = "consultation")
 	public Set<Prescription> getPrescription() {return prescription;}
 	public void setPrescription(Set<Prescription> prescription) {this.prescription = prescription;}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "PATIENTID")
+	public Patient getPatient() {return patient;}
+	public void setPatient(Patient patient) {this.patient = patient;}
 
 }

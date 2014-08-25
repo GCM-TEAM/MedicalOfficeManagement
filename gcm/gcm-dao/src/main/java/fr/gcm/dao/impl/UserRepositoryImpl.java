@@ -23,7 +23,6 @@ import fr.gcm.model.User;
  *         user dans la couche DAO.
  * 
  */
-
 @Repository
 @Transactional
 public class UserRepositoryImpl implements IUserRepository {

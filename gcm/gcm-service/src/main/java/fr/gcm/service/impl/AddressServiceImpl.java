@@ -21,7 +21,7 @@ import fr.gcm.service.IAddressService;
  */
 @Service("addressService")
 @Transactional
-public class AddressService implements IAddressService {
+public class AddressServiceImpl implements IAddressService {
 
 	/**
 	 * Service patient repository

@@ -34,7 +34,7 @@ public class LoginManagedBean implements Serializable {
 	 * Nom d'utilisateur
 	 * 
 	 */
-	private String login;
+	private String username;
 
 	/**
 	 * Mot de passe
@@ -59,16 +59,16 @@ public class LoginManagedBean implements Serializable {
 		FacesContext.getCurrentInstance().getExternalContext().getFlash()
 				.setKeepMessages(true);
 
-		if (login != null && password != null) {
+		if (username != null && password != null) {
 
-			if (userService.findUserByLogin(login)) {
+			if (userService.findUserByLogin(username)) {
 
 				HttpSession session = ManagedSession.getSession();
-				session.setAttribute("login", login);
+				session.setAttribute("login", username);
 
 				loggedIn = true;
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome ",
-						login);
+						username);
 				FacesContext.getCurrentInstance().addMessage(null, msg);
 
 				context.addCallbackParam("loggedIn", loggedIn);
@@ -109,7 +109,7 @@ public class LoginManagedBean implements Serializable {
 	 * @return
 	 */
 	public String getUsername() {
-		return login;
+		return username;
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class LoginManagedBean implements Serializable {
 	 * @param username
 	 */
 	public void setUsername(String username) {
-		this.login = username;
+		this.username = username;
 	}
 
 	/**

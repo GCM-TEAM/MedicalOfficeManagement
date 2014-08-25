@@ -39,7 +39,7 @@ public class Patient implements Serializable
 	private String 	sex;			// le sex du patient
 	
 	private Set<Appointment> appointments = new HashSet<Appointment>();   // liste des RDVs
-//	private Set<Consultation> consultations = new HashSet<Consultation>(); // liste des consultations
+	private Set<Consultation> consultations = new HashSet<Consultation>(); // liste des consultations
 	private Set<Address> addresses = new HashSet<Address>();
 	
 	/**
@@ -142,18 +142,14 @@ public class Patient implements Serializable
 	 * @return the eventID
 	 */
 	@Column(name = "EVENTID", unique = true)
-	public String getEventID() {
-		return eventID;
-	}
+	public String getEventID() {return eventID;}
 
 	/**
 	 * @param eventID the eventID to set
 	 */
-	public void setEventID(String eventID) {
-		this.eventID = eventID;
-	}
+	public void setEventID(String eventID) {this.eventID = eventID;}
 
-//	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
-//	public Set<Consultation> getConsultations() {return consultations;}
-//	public void setConsultations(Set<Consultation> consultations) {this.consultations = consultations;}
+	@OneToMany(fetch = FetchType.LAZY , mappedBy = "patient")
+	public Set<Consultation> getConsultations() {return consultations;}
+	public void setConsultations(Set<Consultation> consultations) {this.consultations = consultations;}
 }

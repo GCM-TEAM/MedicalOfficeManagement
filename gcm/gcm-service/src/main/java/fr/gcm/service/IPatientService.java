@@ -38,7 +38,7 @@ public interface IPatientService {
 	List<Patient> findAllPatient();
 	
 	/**
-	 * Service de supprission des patients
+	 * Service de suppression des patients
 	 * @param eventID
 	 * 				id evenement
 	 */

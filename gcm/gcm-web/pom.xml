@@ -17,16 +17,6 @@
 		<prime.version>0.7.1</prime.version>
 	</properties>
 
-	<!-- primefaces repo -->
-	 <repositories>
-		<repository>
-			<id>prime-repo</id>
-			<name>Prime Repo</name>
-			<url>http://repository.primefaces.org</url>
-		</repository>
-	</repositories> 
-
-
 	<dependencies>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
@@ -76,11 +66,26 @@
 			<version>3.0.1</version>
 		</dependency>
 
+		<!-- Export format PDF -->
+		<dependency>
+			<groupId>com.lowagie</groupId>
+			<artifactId>itext</artifactId>
+			<version>2.1.7</version>
+		</dependency>
+
 		<!-- Primefaces dependency -->
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
 			<version>4.0.RC1</version>
+		</dependency>
+		
+		
+		 <!-- Export format excel -->
+		 <dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.5-FINAL</version>
 		</dependency>
 
 
@@ -90,7 +95,7 @@
 			<artifactId>logback-classic</artifactId>
 		</dependency>
 	</dependencies>
-	 <build>
+	<build>
 		<finalName>gcm-web</finalName>
-	</build> 
+	</build>
 </project>

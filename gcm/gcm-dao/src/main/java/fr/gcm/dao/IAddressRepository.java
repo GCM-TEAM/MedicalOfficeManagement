@@ -48,7 +48,7 @@ public interface IAddressRepository {
 	List<Address> findAllAddresses();
 	
 	/**
-	 * Supprimer les adresse avec l'id de l'evenement
+	 * Suppression les adresses avec l'id de l'evenement
 	 * @param eventID
 	 *  			id de l'evenement
 	 */

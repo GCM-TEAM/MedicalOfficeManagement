@@ -1,7 +1,8 @@
-package fr.gcm.tests;
+package fr.gcm.dao.impl;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import fr.gcm.model.User;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/springConfig/gcmdao-cfg.xml"})
+@Ignore
 public class UserRepositoryImplTest 
 {
 	@Autowired

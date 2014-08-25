@@ -34,7 +34,7 @@ public class Prescription implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long prescriptionID;    	//identifiant de l'ordennance
+	private Integer prescriptionID;    	//identifiant de l'ordennance
 	private Date prescriptionDate;		// date de d�livrance 
 	private Set<Medecines> medecines = new HashSet<Medecines>();
 	private Consultation consultation; //consultation
@@ -85,8 +85,8 @@ public class Prescription implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator= "PRESCRIPTION_ID_SEQ")
 	@Column(name="PRESCRIPTIONID", unique = true , nullable = false)
-	public Long getPrescriptionID() {return prescriptionID;}
-	public void setPrescriptionID(Long prescriptionID) {this.prescriptionID = prescriptionID;}
+	public Integer getPrescriptionID() {return prescriptionID;}
+	public void setPrescriptionID(Integer prescriptionID) {this.prescriptionID = prescriptionID;}
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="PRESCRIPTIONDATE", unique = true, nullable = false)
@@ -98,7 +98,7 @@ public class Prescription implements Serializable {
 	public void setMedecines(Set<Medecines> medecines) {this.medecines = medecines;}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CONSULTATIONID" , nullable = false)
+	@JoinColumn(name = "CONSULTATIONID")
 	public Consultation getConsultation() {return consultation;}
 	public void setConsultation(Consultation consultation) {this.consultation = consultation;}
 }

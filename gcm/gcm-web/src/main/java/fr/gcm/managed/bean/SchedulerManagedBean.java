@@ -199,10 +199,10 @@ public class SchedulerManagedBean implements Serializable {
 	 * Retourne toutes les adresses
 	 * 
 	 * @return liste d'adresse
-	 */
+	 *//*
 	public List<Address> findAllAddresses() {
 		return addressService.findAllAddresses();
-	}
+	}*/
 
 	/**
 	 * 
